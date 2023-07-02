@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="end_of_service_notification"
+                model="end.service"
+                string="اخطار بانهاء الخدمة"
+                report_type="qweb-pdf"
+                name="ommat_employee_id.end_of_service_notification_ommat"
+                file="ommat_employee_id.end_of_service_notification_ommat"
+        />
+        <template id="end_of_service_notification_ommat">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.internal_layout">
+                        <div class="page">
+                            <!--                            <style type="text/css">-->
+                            <!--                                table.supplier {-->
+                            <!--                                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;-->
+                            <!--                                border-collapse: collapse;-->
+                            <!--                                width: 100%;-->
+                            <!--                                text-align : center;-->
+                            <!--                                margin :auto;-->
+                            <!--                                }-->
+
+                            <!--                                table.supplier td, table.supplier th {-->
+                            <!--                                border: 1px solid #ddd;-->
+                            <!--                                padding: 8px;-->
+                            <!--                                }-->
+
+                            <!--                                table.supplier tr:nth-child(even){background-color: #f2f2f2;}-->
+
+                            <!--                                table.supplier tr:hover {background-color: #ddd;}-->
+
+                            <!--                                table.supplier th {-->
+                            <!--                                padding-top: 12px;-->
+                            <!--                                padding-bottom: 12px;-->
+                            <!--                                text-align: left;-->
+                            <!--                                background-color: #990000 ;-->
+                            <!--                                color: white;-->
+                            <!--                                text-align : center;-->
+                            <!--                                }-->
+                            <!--                            </style>-->
+
+                            <br/>
+                            <div margin="0 auto" padding-top="0">
+                                <!--                                <br/>-->
+                                <table width="100%" style="border: 1px solid #ddd; background-color: #EFECEB ;">
+                                    <tr>
+                                        <td width="30%" style="border: 1px solid #ddd;">
+                                            <span>
+                                                <img src="ommat_employee_id/static/description/logo.png" alt="logo"
+                                                     width="200px" height="120px"/>
+                                            </span>
+                                        </td>
+                                        <!--                                        <td width="10%"></td>-->
+                                        <!--                                        <td width="10%"></td>-->
+
+                                        <td width="30%" style="border: 1px solid #ddd;" align="center">
+                                            <h3>اخطار بانهاء الخدمة</h3>
+                                        </td>
+                                        <td width="30%" style="border: 1px solid #ddd;" align="center">
+                                            <h3>الشركة العربية لأمات الدواجن</h3>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+
+                            <div align="right" dir="rtl"  style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+
+                                        <td text-align="right">
+                                            <h4>الاسم:</h4>
+                                        </td>
+
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.name"/>
+                                            </h4>
+                                        </td>
+
+                                        <td text-align="right">
+                                            <h4> الرقم الوظيفي:</h4>
+                                        </td>
+
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.emp_barcode"/>
+                                            </h4>
+                                        </td>
+
+
+                                    </tr>
+                                    <tr >
+
+
+
+
+                                        <td text-align="right">
+                                            <h4>الادارة/القسم/الموقع:</h4>
+                                        </td>
+
+                                        <td text-align="right">
+                                            <h4>
+                                                <field t-field="o.dept"/>
+                                            </h4>
+                                        </td>
+
+                                        <td>
+                                            <h4>
+                                                <span>
+                                                    <h2> &amp;nbsp; </h2>
+                                                </span>
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <span>
+                                                    <h2> &amp;nbsp; </h2>
+                                                </span>
+                                            </h4>
+                                        </td>
+
+
+                                    </tr>
+                                    <tr>
+
+
+
+
+
+                                        <td text-align="right">
+                                            <h4>العنوان/الشارع: </h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.street"/>
+                                            </h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4> المدينة:</h4>
+                                        </td>
+
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.city"/>
+                                            </h4>
+                                        </td>
+
+
+
+                                    </tr>
+
+                                    <tr>
+
+
+
+                                        <td text-align="right">
+                                            <h4>المحافظة:</h4>
+                                        </td>
+
+                                         <td>
+                                            <h4>
+                                                <field t-field="o.governorate"/>
+                                            </h4>
+                                        </td>
+
+                                         <td text-align="right">
+                                            <h4>الدولة:</h4>
+                                        </td>
+
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.country_name"/>
+                                            </h4>
+                                        </td>
+
+
+                                    </tr>
+                                </table>
+
+                            </div>
+
+
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+
+                            <div align="right" >
+
+
+                                <table align="right" style="text-align:right">
+                                    <tr>
+                                        <td>
+                                            <h5>&amp;nbsp; يوم اعتبارا من &amp;nbsp;</h5>
+                                        </td>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.duration_of_work_interruption"/>
+                                            </h5>
+                                        </td>
+                                        <td>
+                                            <h5>&amp;nbsp; والذي يحدد انقطاعكم عن العمل لمدة &amp;nbsp;</h5>
+                                        </td>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.warning_date"/>
+                                            </h5>
+                                        </td>
+                                        <td>
+                                            <h5>&amp;nbsp; بالاشارة الي الانذار المرسل لكم بتاريخ &amp;nbsp;</h5>
+                                        </td>
+
+
+                                    </tr>
+
+                                </table>
+                                <table align="right" style="text-align:right">
+                                    <tr>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.date_to"/>
+                                            </h5>
+                                        </td>
+                                        <td>
+                                            <h5>&amp;nbsp; وحتي &amp;nbsp;</h5>
+                                        </td>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.from_date"/>
+                                            </h5>
+                                        </td>
+
+
+                                    </tr>
+
+                                </table>
+
+                                <table align="right" style="text-align:right">
+                                    <tr>
+                                        <td>
+                                            <h5>
+                                                &amp;nbsp; وحيث انه لا زال انقطاعكم مستمر للمدة الموجبة بانهاء خدمتكم
+                                                وهي وفقا لأحكام لائحة الجزاءات التأديبية الصادرة بالقانون&amp;nbsp;
+                                            </h5>
+
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table align="right" style="text-align:right">
+
+
+                                    <tr>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.from_date_issued"/>
+                                            </h5>
+                                        </td>
+                                        <td>
+                                            <h5>
+
+                                                &amp;nbsp; لذا نخطركم اسفين بإنهاء خدمتكم للانقطاع عن العمل اعتبارا من
+                                                &amp;nbsp;
+                                            </h5>
+
+                                        </td>
+
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.company_id.law_punishment"/>
+                                            </h5>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table align="right" style="text-align:right">
+                                    <tr>
+
+                                        <td>
+                                            <h5>
+
+                                                برجاء التكرم بإخلاء طرفكم من جميع العهد المالية والمخزنية الموجودة طرفكم
+                                                والحضور الي مقر الشركة الرئيس الكائن في
+                                            </h5>
+
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table align="right" style="text-align:right">
+                                    <tr>
+                                        <td>
+                                            <h5>
+                                                &amp;nbsp; لاستلامكم جميع مستحقاتكم القانونية &amp;nbsp;
+                                            </h5>
+                                        </td>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.company_id.country_id"/>
+                                                -
+                                                <field t-field="o.company_id.state_id"/>
+                                                -
+                                                <field t-field="o.company_id.city"/>
+                                                -
+                                                <field t-field="o.company_id.street"/>
+                                            </h5>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+
+
+                            <div align="center">
+                                <span>
+
+                                    <h5>،،، واقبلوا التحية ،،،</h5>
+
+                                </span>
+                            </div>
+
+                            <br/>
+                            <br/>
+
+                            <table align="right" style="text-align:right">
+                                <tr>
+                                     <td>
+                                        <h2>
+                                            &amp;nbsp;.......................................&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                        </h2>
+                                    </td>
+                                    <td>
+                                        <h5>
+                                            <field t-field="o.employees_dept_head"/>
+                                        </h5>
+                                    </td>
+                                    <td>
+                                        <h5>&amp;nbsp; رئيس قسم شئون العاملين &amp;nbsp;</h5>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <h2>
+                                            &amp;nbsp;.......................................&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                        </h2>
+                                    </td>
+                                    <td>
+                                        <h5><field t-field="o.hr_head"/></h5>
+                                    </td>
+                                    <td>
+                                        <h5>&amp;nbsp; مدير الموارد البشرية&amp;nbsp;</h5>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h2>
+                                            &amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                        </h2>
+                                    </td>
+                                    <td>
+                                        <h5><field t-field="o.issued_in"/></h5>
+                                    </td>
+                                    <td>
+                                        <h5>&amp;nbsp; تحريرا في&amp;nbsp;</h5>
+                                    </td>
+                                </tr>
+
+                            </table>
+
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+
+
+

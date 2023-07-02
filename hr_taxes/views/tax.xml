@@ -1,0 +1,110 @@
+<odoo>
+    <data>
+
+        <record id="hr_payslip_form_tax_inherit" model="ir.ui.view">
+            <field name="name">hr_payslip_form_tax_inherit</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll_community.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='credit_note']" position="after">
+                    <field name="all_lines_tax" invisible="0"/>
+                    <field name="sum_slides" />
+<!--                    <field name="check" invisible="1"/>-->
+
+                </xpath>
+                 <xpath expr="//button[@name='action_payslip_done']" position="replace">
+                     <button string="Confirm" name="action_payslip_done" type="object" states="draft,compute" class="oe_highlight"/>
+
+                 </xpath>
+
+            </field>
+        </record>
+        <record id="inherit_hr_salary_rule_form" model="ir.ui.view">
+            <field name="name">inherit.hr.salary.rule.form</field>
+            <field name="model">hr.salary.rule</field>
+            <field name="inherit_id" ref="hr_payroll_community.hr_salary_rule_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='active']" position="after">
+                    <field name="taxable"/>
+                    <field name="has_tax"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tax_segments_form" model="ir.ui.view">
+            <field name="name">payroll_update_form</field>
+            <field name="model">tax.segments</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                    <group>
+                        <group>
+                            <field name="name_slide"/>
+                        </group>
+                        <group>
+                            <field name="exemption_limit"     attrs="{'invisible': [('name_slide','!=','first_slide')]}"/>
+                        </group>
+                        <group>
+                            <field name="amount_from"/>
+                            <field name="to"/>
+                        </group>
+                        <group>
+                            <field name="tax_rate"/>
+                            <field name="difference"/>
+                            <field name="discount_value" invisible="1"/>
+                        </group>
+                    </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="tax_segments_tree" model="ir.ui.view">
+            <field name="name">tax.segments.tree</field>
+            <field name="model">tax.segments</field>
+            <field name="arch" type="xml">
+                <tree default_order="id">
+                    <field name="name_slide"/>
+<!--                    <field name="exemption_limit"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record id="tax_segments_action" model="ir.actions.act_window">
+            <field name="name">Tax Segments</field>
+            <field name="res_model">tax.segments</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="tax_menu_root"
+                  name="Taxes"
+                  parent="hr_payroll_community.menu_hr_payroll_community_root"
+                  sequence="12"
+        />
+
+        <menuitem id="tax_segments_menu"
+                  name="Tax Definition"
+                  action="tax_segments_action"
+                  parent="tax_menu_root"
+                  sequence="1"
+        />
+
+<!--        <record id="inherit_hr_contract_form" model="ir.ui.view">-->
+<!--            <field name="name">inherit.hr.contract.form</field>-->
+<!--            <field name="model">hr.contract</field>-->
+<!--            &lt;!&ndash;<field name="groups_id" eval="[(4, ref(''))]"/>&ndash;&gt;-->
+<!--            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='job_id']" position="after">-->
+<!--                    <field name="taxable"/>-->
+<!--                    <field name="monthly_amount_due" attrs="{'invisible':[('taxable','=',False)]}"/>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+    </data>
+</odoo>

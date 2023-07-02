@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_task_form_view_inherited" model="ir.ui.view">
+        <field name="name">project.task.view.inherited</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2" />
+        <field eval="14" name="priority"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button class="oe_stat_button btn-sm btn-primary" string="Send By Email" type="object" name="send_task_by_email"
+                    icon="fa-envelope">
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

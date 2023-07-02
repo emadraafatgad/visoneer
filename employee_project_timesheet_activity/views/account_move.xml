@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="account_move_contract_inherit_bms">
+        <field name="name">account_move_contract_inherit_bms</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@id='invoice_tab']" position="inside">
+                <field name="expenses_line_ids" string="Expenses" invisible="1">
+                    <tree editable="top" string="Timesheet Activities" sample="1">
+                        <field name="date"/>
+                        <field name="employee_id" invisible="0"/>
+                        <field name="project_id" required="1" options="{'no_create_edit': True}"/>
+                        <field name="name" optional="show" required="0"/>
+                        <field name="amount" sum="Total"/>
+                        <field name="currency_id" invisible="0"/>
+                        <field name="company_id" invisible="1"/>
+                    </tree>
+                    <form string="Expenses">
+                        <sheet string="Expenses">
+                            <group>
+                                <group>
+                                    <field name="name"/>
+                                    <field name="project_id" required="1"/>
+                                    <!--                                                       context="{'form_view_ref': 'project.project_project_view_form_simplified',}"/>-->
+                                    <field name="employee_id" invisible="0"/>
+                                    <field name="company_id" groups="base.group_multi_company"
+                                           invisible="1"/>
+                                </group>
+                                <group>
+                                    <field name="date"/>
+                                    <field name="amount" invisible="1"/>
+
+                                    <field name="currency_id" invisible="0"/>
+                                </group>
+                            </group>
+                        </sheet>
+                    </form>
+                </field>
+                <field name="hr_expense_line_ids" string="Expenses"
+                       attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund'))]}">
+                    <tree editable="top" string="Expenses Activities" sample="1">
+                        <field name="date" string="date"/>
+                        <field name="employee_id" invisible="0"/>
+                        <field name="project_id" required="1" options="{'no_create_edit': True}"/>
+                        <field name="name" optional="show" required="0"/>
+                        <field name="total_amount" sum="Total"/>
+                        <field name="amount" string="Expense" invisible="1" sum="Total"/>
+                        <field name="currency_id" invisible="0"/>
+                        <field name="bill_non"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="state" invisible="1"/>
+                    </tree>
+                    <form string="Expenses">
+                        <sheet string="Expenses">
+                            <group>
+                                <group>
+                                    <field name="name"/>
+                                    <field name="project_id" required="1"/>
+                                    <!--                                                       context="{'form_view_ref': 'project.project_project_view_form_simplified',}"/>-->
+                                    <field name="employee_id" invisible="0"/>
+                                    <field name="company_id" groups="base.group_multi_company"
+                                           invisible="1"/>
+                                </group>
+                                <group>
+                                    <field name="date"/>
+                                    <field name="amount" invisible="1"/>
+
+                                    <field name="currency_id" invisible="0"/>
+                                    <field name="state" invisible="1"/>
+                                </group>
+                            </group>
+                        </sheet>
+                    </form>
+                </field>
+                <field name="per_diem" invisible="1"/>
+                <field name="employee_id" invisible="1"/>
+                <field name="other_expense_ids" string="Other expenses" context="{'default_project_id': project_id,'default_employee_id': employee_id,'default_amount':per_diem,'default_currency_id': currency_id}"
+                       attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund'))]}">
+                    <tree editable="top" string="Other Expenses " sample="1">
+                        <field name="date" string="date"/>
+                        <field name="employee_id" invisible="0"/>
+                        <field name="project_id" required="1" options="{'no_create_edit': True}"/>
+                        <field name="name" optional="show" required="0"/>
+                        <field name="quantity"/>
+                        <field name="amount" string="Amount" invisible="0" sum="Total"/>
+                        <field name="total_amount" sum="Total"/>
+                        <field name="currency_id" invisible="0"/>
+                        <field name="company_id" invisible="1"/>
+                    </tree>
+                    <form string="Expenses">
+                        <sheet string="Expenses">
+                            <group>
+                                <group>
+                                    <field name="name"/>
+                                    <field name="project_id" required="1"/>
+                                    <!--                                                       context="{'form_view_ref': 'project.project_project_view_form_simplified',}"/>-->
+                                    <field name="employee_id" invisible="0"/>
+                                    <field name="company_id" groups="base.group_multi_company"
+                                           invisible="1"/>
+                                </group>
+                                <group>
+                                    <field name="date"/>
+                                    <field name="amount" invisible="1"/>
+                                    <field name="total_amount" invisible="1"/>
+
+                                    <field name="currency_id" invisible="0"/>
+                                </group>
+                            </group>
+                        </sheet>
+                    </form>
+                </field>
+            </xpath>
+            <xpath expr="//field[@name='payment_reference']" position="after">
+                <field name="service_id"/>
+                <field name="project_id"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

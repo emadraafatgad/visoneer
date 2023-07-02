@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+compute_payslip_group,compute_payslip_group,model_compute_payslip,payslip_computations_group,1,1,1,1
+done_payslip_group,done_payslip_group,model_done_payslip,payslip_computations_group,1,1,1,1

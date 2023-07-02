@@ -1,0 +1,40 @@
+<odoo>
+
+    <record id="view_employee_info_inherit" model="ir.ui.view">
+        <field name="name">view.hr.employee.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="branch_id" options="{'no_create': True}"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_employee_info_tree_inherit" model="ir.ui.view">
+        <field name="name">view.hr.employee.inherit.tree</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='department_id']" position="after">
+                <field name="branch_id" options="{'no_create': True}"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_employee_info_kanban_inherit" model="ir.ui.view">
+        <field name="name">view.hr.employee.inherit.kanban</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="branch_id" />
+            </xpath>
+            <xpath expr="//field[@name='category_ids']" position="after">
+                <field name="branch_id" />
+            </xpath>
+<!--            <xpath expr="//ul" position="inside">-->
+<!--                <li t-if="record.branch_id.raw_value" class="o_text_overflow"><field name="branch_id"/></li>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+
+</odoo>

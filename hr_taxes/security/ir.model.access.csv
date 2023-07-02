@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tax_segments_group,access_tax_segments_group,model_tax_segments,tax_group,1,1,1,1
+access_tax_part_group,access_tax_part_group,model_tax_part,tax_group,1,1,1,1
+access_working_days_group,access_working_days_group,model_working_days,tax_group,1,1,1,1
+
+working_days_read_group,working_days_read_group,model_working_days,,1,0,0,0

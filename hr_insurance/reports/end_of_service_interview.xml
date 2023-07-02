@@ -1,0 +1,1043 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="end_of_service_interview"
+                model="service.interview"
+                string="مقابلة نهاية خدمة"
+                report_type="qweb-pdf"
+                name="ommat_employee_id.end_of_service_interview_temp"
+                file="ommat_employee_id.end_of_service_interview_temp"
+        />
+        <template id="end_of_service_interview_temp">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.internal_layout">
+                        <div class="page">
+                            <div margin="0 auto" padding-top="0">
+                                <table width="100%" style="border: 1px solid #ddd; background-color: #EFECEB ;">
+                                    <tr>
+                                        <td width="30%" style="border: 1px solid #ddd;">
+                                            <span>
+                                                <img src="ommat_employee_id/static/description/logo.png" alt="logo"
+                                                     width="200px" height="120px"/>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br/>
+                            <div align="right" dir="rtl" style="text-align:center">
+                                <table width="100%" style="border: 1px solid #ddd; background-color: #a39d9d ;">
+                                    <tr>
+                                        <td>
+                                            <h3>تقرير مقابلة نهاية الخدمة</h3>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%" style="border: 1px solid #ddd; background-color: #fff ;">
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>الرقم الوظيفي:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.emp_code"/>
+                                            </h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>الاسم:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.name"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>اﻻدارة:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.emp_dpett"/>
+                                            </h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>القسم:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.emp_dpet"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>الوظيفة:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.job_position"/>
+                                            </h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>اسم المدير المباشر:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.manger_name"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>تاريخ بداية العمل:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.work_starting_date"/>
+                                            </h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>تاريخ نهاية العمل:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.work_ending_date"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br/>
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>سبب ترك العمل:</h4>
+                                            <h4>
+                                                <field t-field="o.reason_leaving"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br/>
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+                                        <td>
+                                            <h4>(1) ظروف العمل</h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br/>
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+                                        <td>
+                                            <h4>سوء معاملة</h4>
+                                        </td>
+                                        <td>
+                                            <h4>بيئة العمل</h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>شرح اسباب اخري</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.explain_other_reasons"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>ملاحظات</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.notes"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br/>
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>(2) اسباب شخصية</h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br/>
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>صحية</h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>عائلية</h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>الزواج</h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>بعد السكن</h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>وسائل النقل</h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>شرح اسباب اخري</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.explain_other_reasonss"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>ملاحظات</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.notess"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br/>
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>(3) المستقبل الوظيفي</h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br/>
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>عدم وجود فرصة للترقي</h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>الراتب</h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>المزايا المالية</h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>العمل نمطي ولا يوجد جديد</h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>شرح اسباب اخري</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.explain_other_reasonsss"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>ملاحظات</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.notesss"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br/>
+                            <br/>
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>ماهى أكثر الأشياء التى جعلتك تشعر بالرضا خلال فتره عملك ؟</h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br/>
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>الزملاء</h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>الروؤساء</h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>ظروف العمل</h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>الراتب والمزايا</h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>شرح اسباب اخري</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.explain_other_reasonssss"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br/>
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>ماهى اقل الأشياء التى جعلتك لا تشعر بالرضا خلال فتره عملك ؟</h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br/>
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>الزملاء</h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>الروؤساء</h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>ظروف العمل</h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>الراتب والمزايا</h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>شرح اسباب اخري</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.explain_other_reasonsssss"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br/>
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>فى رأيك ما هى الأشياء التى ترى إنها ستساهم فى تحسين الوظيفه التى كنت
+                                                تقوم بها؟
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br/>
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.improving_job"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br/>
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>هل وجدت العمل الذى كنت تقوم به كما توقعت أن يكون ؟
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <br/>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.find_work"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+
+                                    <table width="100%">
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>لو كان مختلف عما توقعت ماهو هذا الإختلاف ؟
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.what_this_difference"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>ماهى السياسات والإجراءات التى لا توافق عليها ؟
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.policies_and_procedures_not_agree"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>هل تعتقد أن الشركه كانت واضحه فى شرح السياسات والإجراءات الخاصه
+                                                    بالعمل
+                                                    فى
+                                                    الشركه ؟
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.explaining_policies_work_company"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>هل تعتقد إنه حدث تفرقه فى المعامله معك خلال فتره عملك ؟
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.difference_during_work_period"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>الترقية</h4>
+                                            </td>
+                                            <td text-align="right">
+                                                <h4>الراتب</h4>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>شرح اسباب اخري</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.explain_oother_reasonsss"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>هل تحدثت مع أحد بخصوص التفرقه فى المعامله ؟
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.talked_anyon_difference"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>ماذا حدث بعد أن تحدثت فى مشكله التفرقه؟</h4>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>
+                                                    <field t-field="o.after_speake_about_problem"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>لماذا لم تتحدث فى هذا الأمر مع أحد؟</h4>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>
+                                                    <field t-field="o.dont_talk_about_anyone"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td text-align="right">
+                                                <h3>تقييم اﻻتي وفقا لما يلي :
+                                                </h3>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(1) ظروف العمل</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.working_conditionslity"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(2) تعاون الزملاء</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.colleagues_collaboration"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(3) التعاون مع الإدارات الأخرى</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.cooperation_with_other_departments"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(4) الأجهزه والآلآت المستخدمه</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.devices_and_devices_used"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(5) التكنولوجيا المستخدمه</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.technology_used"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(6) التدريب</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.Training"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(7) تداول المعلومات داخل الإداره</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.handling_information"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(8) تداول المعلومات الخاصه بالمزايا الماليه والسياسات الماليه</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.trading_information_financial"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(9) الحاله المعنويه مع زملاء العمل</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.moral_situation"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(10) الحاله المعنوبه داخل الإداره</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.case_question"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(11) ضغط العمل</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.work_pressure"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(12) الراتب</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.salaary"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(13) المزايا الماليه والعينيه</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.financial_kind_benefits"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>هل تلقيت التوجيه والتدريب المناسب عند بدايه عملك بالوظيفه؟
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.receive_appropriate_guidance_and_training"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>ماهى الدورات التدريبيه التى توصى بأن يحصل عليها العاملين فى نفس
+                                                    الوظيفه؟
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.training_courses_workers"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>فى رأيك ما الذى يجب أن تقوم به الشركه لرفع الروح المعنويه للعالمين؟
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.raise_the_morale"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>ماهى نقاط القوه التى يتمتع بها فريق العمل الذى كنت تعمل معه؟
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.strengths_staff"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>ماهى نقاط الضعف فى فريق العمل الذى كنت تعمل معه؟
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.weaknesses_staff"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td text-align="right">
+                                                <h3>تقييم رئيسك المباشر :
+                                                </h3>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(1) يساعد العاملين علي تطوير انفسهم</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.workers_develop"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(2) لا يفرق فى المعامله بين العاملين</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.differentiate_between_workers"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(3) يقدر العاملين الذين يؤدون عملهم</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.estimated_workers"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(4) يخلق جو من التعاون بين فريق العمل</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.cooperation_between_team"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(5) يشجع على تقديم الإقتراحات</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.encourages_suggestions"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(6) يجيب على الأسئله ويحل المشاكل</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.solves_problems"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(7) لديه صفات المدير بصفه عامه</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.manager_qualities_general"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(8)يطبق السياسات والإجراءات الخاصه بالعمل</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.policies_procedures"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>(9)يقوم بالتوجيه والمساعده</h4>
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.provides_guidance_assistance"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>كم مره قام مديرك بمناقشه أدائك معك؟
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.discussed_your_performance"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>هل كانت هناك أهداف واضحه خلال فتره عملك؟
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.clear_targets"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>ما الشئ الذى تراه ميزه فى شركتنا عن الشركات الأخرى؟
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.advantage_in_company"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>ما الذى تتمنى أن تراه فى شركتنا من تغييرات حتى تعود مره أخرى للعمل
+                                                    معنا؟
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <td>
+                                                <h4>
+                                                    <field t-field="o.wishes_in_company"/>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <div align="right" dir="rtl" style="text-align:right">
+                                    <table width="100%">
+                                        <tr>
+                                            <td text-align="right">
+                                                <h4>التوقيع
+                                                </h4>
+                                            </td>
+                                            <td text-align="right">
+                                                <h4>التاريخ
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+
+
+

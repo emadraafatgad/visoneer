@@ -1,0 +1,187 @@
+<odoo>
+    <data>
+
+        <record id="hr_job_inherit_form_view" model="ir.ui.view">
+            <field name="name">hr_job_inherit_form_view</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id']" position="before">
+                    <field name="insurance_job_title"/>
+                </xpath>
+            </field>
+        </record>
+        <!--             Employee resignation form view -->
+        <record id="emp_insurance_form_view" model="ir.ui.view">
+            <field name="name">emp_insurance_form_view</field>
+            <field name="model">emp.insurance</field>
+            <field name="arch" type="xml">
+                <form>
+                    <!--                    <header>-->
+                    <!--                        <button name="action_submit" type="object"-->
+                    <!--                                string="Cancel" states="confirmed" class="btn-primary"-->
+                    <!--                        />-->
+                    <!--                        <button name="action_confirm" type="object"-->
+                    <!--                                string="Confirm" states="submit" class="btn-primary"-->
+                    <!--                        />-->
+                    <!--                        <button name="action_approve" type="object"-->
+                    <!--                                string="Approve" states="confirmed" class="btn-primary"-->
+                    <!--                        />-->
+                    <!--                        <field name="state" widget="statusbar" />-->
+                    <!--                    </header>-->
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="active"/>
+                                <field name="min_insurance_salary"/>
+                                <field name="max_insurance_salary"/>
+
+
+
+                            </group>
+                            <group>
+                                <label for="company_percentage"/>
+                                <div>
+                                    <field name="company_percentage" class="oe_inline"/>%
+                                </div>
+                                <label for="employee_percentage"/>
+                                <div>
+                                    <field name="employee_percentage" class="oe_inline"/>%
+                                </div>
+                                <field name="company_id" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="tot_company_percentage" invisible="1" force_save="1"/>
+                                <field name="tot_emp_percentage" invisible="1" force_save="1"/>
+                            </group>
+                            <group>
+                                <field name="tot_age_company_percentage" invisible="1" force_save="1"/>
+                                <field name="tot_age_emp_percentage" invisible="1" force_save="1"/>
+                            </group>
+                            <group>
+                                <field name="is_over_age"/>
+                                <label for="over_age_company_percentage"
+                                       attrs="{'invisible':[('is_over_age','=', False)]}"/>
+                                <div attrs="{'invisible':[('is_over_age','=', False)]}">
+                                    <field name="over_age_company_percentage" class="oe_inline"/>%
+                                </div>
+                                <label for="over_age_employee_percentage"
+                                       attrs="{'invisible':[('is_over_age','=', False)]}"/>
+                                <div attrs="{'invisible':[('is_over_age','=', False)]}">
+                                    <field name="over_age_employee_percentage" class="oe_inline"/>%
+                                </div>
+                                <label for="over_age"
+                                       attrs="{'invisible':[('is_over_age','=', False)]}"/>
+                                <div attrs="{'invisible':[('is_over_age','=', False)]}">
+                                    <field name="over_age" class="oe_inline"/>Years
+                                </div>
+                            </group>
+
+
+                        </group>
+                        <notebook>
+                            <page name="certified_social_insurance" string="Certified Social Insurance">
+                                <!--                                <group>-->
+                                <field name="insurances_type_per" widget="one2many_list" readonly='False'
+                                       force_save="1">
+                                    <tree editable="bottom">
+
+                                        <field name="insurances_type" force_save="1"/>
+                                        <field name="co_percentage" force_save="1" sum="Total Company Percentage"/>
+                                        <field name="employee_percentage" force_save="1"
+                                               sum="Total Employee Percentage"/>
+
+                                    </tree>
+                                </field>
+                                <!--                                </group>-->
+                            </page>
+                            <page name="certified_social_insurance" string="Over Age Social Insurance"
+                                  attrs="{'invisible':[('is_over_age','=', False)]}">
+                                <!--                                <group>-->
+                                <field name="insurances_over_age" widget="one2many_list" readonly='False'
+                                       force_save="1">
+                                    <tree editable="bottom">
+
+                                        <field name="insurances_type" force_save="1"/>
+                                        <field name="co_percentage" force_save="1" sum="Total Company Percentage"/>
+                                        <field name="employee_percentage" force_save="1"
+                                               sum="Total Employee Percentage"/>
+
+                                    </tree>
+                                </field>
+                                <!--                                </group>-->
+                            </page>
+
+                        </notebook>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="emp_insurance_tree_view" model="ir.ui.view">
+            <field name="name">emp_insurance_tree_view</field>
+            <field name="model">emp.insurance</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                    <field name="min_insurance_salary"/>
+                    <field name="max_insurance_salary"/>
+                    <field name="company_percentage"/>
+                    <field name="employee_percentage"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_emp_insurance" model="ir.actions.act_window">
+            <field name="name">Social Insurance</field>
+            <field name="res_model">emp.insurance</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem
+                id="menu_social_insurance"
+                name="Social Insurance"
+                parent="hr_payroll_community.menu_hr_payroll_community_configuration"
+                action="action_emp_insurance"
+                sequence="50"
+
+        />
+
+        <record model="ir.ui.view" id="hr_payslip_insurance_form_inherit">
+            <field name="name">hr.payslip.inherit.form</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll_community.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='credit_note']" position="after">
+                    <field name="emp_percentage_insurance" invisible="0"/>
+                    <field name="company_percentage_insurance" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+         <record id="hr_payroll_structure_form_inherit" model="ir.ui.view">
+            <field name="name">hr_payroll_structure_form_inherit</field>
+            <field name="model">hr.payroll.structure</field>
+            <field name="inherit_id" ref="hr_payroll_community.view_hr_employee_grade_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="is_insured" />
+                     <field name="not_insured" />
+
+                </xpath>
+
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

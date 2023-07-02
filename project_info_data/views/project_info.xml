@@ -1,0 +1,66 @@
+<odoo>
+
+    <record id="view_project_info_inherit" model="ir.ui.view">
+        <field name="name">view.project.inherit</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="branch_id" options="{'no_create': True}"/>
+                <field name="country_id" options="{'no_create': True}"/>
+                <field name="state_id" options="{'no_create': True}"/>
+                <field name="city_id" options="{'no_create': True}"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_project_info_kanban_inherit" model="ir.ui.view">
+        <field name="name">view.project.kanban.inherit</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="branch_id"/>
+                <field name="country_id"/>
+                <field name="state_id"/>
+                <field name="city_id"/>
+            </xpath>
+            <xpath expr="//div[hasclass('o_primary')]" position="inside">
+<!--                <span class="o_text_overflow text-muted" t-if="record.partner_id.value">-->
+<!--                    <span class="fa fa-user mr-2" aria-label="Partner" title="Partner"/>-->
+<!--                    <t t-esc="record.partner_id.value"/>-->
+<!--                </span>-->
+<!--                                <xpath expr="//span[hasclass('o_text_overflow', 'text-muted')]" position="after">-->
+                                <span class="text-muted" t-if="record.branch_id.value">
+                                    <span aria-label="Branch" title="Branch"/>
+                                    <t t-esc="record.branch_id.value"/>
+                                </span>
+                                <span class=" text-muted" t-if="record.country_id.value">
+                                    <span aria-label="Country" title="Country"/>
+                                    <t t-esc="record.country_id.value"/>
+                                </span>
+                                <span class="text-muted" t-if="record.state_id.value">
+                                    <span aria-label="State" title="State"/>
+                                    <t t-esc="record.state_id.value"/>
+                                </span>
+                                <span class="text-muted" t-if="record.city_id.value">
+                                    <span aria-label="City" title="City"/>
+                                    <t t-esc="record.city_id.value"/>
+                                </span>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_project_info_tree_inherit" model="ir.ui.view">
+        <field name="name">view.project.tree.inherit</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="branch_id"/>
+                <field name="country_id"/>
+                <field name="state_id"/>
+                <field name="city_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="hr_contract_timesheet_rate_form_inherit" model="ir.ui.view">
+        <field name="name">hr.contract.timesheet.rate</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='salary']" position="after">
+                <group name="timesheet" string="Timesheet Rate">
+                    <label for="overtime_rate"/>
+                    <div class="o_row">
+                        <field name="overtime_rate" nolabel="1"/>
+                        <field name="overtime_amount" nolabel="1"/>
+                        <span>/ Hour</span>
+                    </div>
+                    <label for="weekend_rate"/>
+                    <div class="o_row">
+                        <field name="weekend_rate" nolabel="1"/>
+                        <field name="weekend_amount" nolabel="1"/>
+                        <span>/ Hour</span>
+                    </div>
+                    <label for="holidays_rate"/>
+                    <div class="o_row">
+                        <field name="holidays_rate" nolabel="1"/>
+                        <field name="holidays_amount" nolabel="1"/>
+                        <span>/ Hour</span>
+                    </div>
+                    <label for="overtime_global"/>
+                    <div class="o_row">
+                        <field name="overtime_global" nolabel="1"/>
+                        <span>/ Hour</span>
+                    </div>
+                    <label for="weekend_global"/>
+                    <div class="o_row">
+                        <field name="weekend_global" nolabel="1"/>
+                        <span>/ Hour</span>
+                    </div>
+                    <label for="holidays_global"/>
+                    <div class="o_row">
+                        <field name="holidays_global" nolabel="1"/>
+                        <span>/ Hour</span>
+                    </div>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

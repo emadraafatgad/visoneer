@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="job_evaluation_card"
+                model="job.evaluation"
+                string="بطاقة تقييم الوظائف"
+                report_type="qweb-pdf"
+                name="ommat_employee_id.job_evaluation_card_ommat_id"
+                file="ommat_employee_id.job_evaluation_card_ommat_id"
+        />
+        <template id="job_evaluation_card_ommat_id">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.internal_layout">
+                        <div class="page">
+                            <div margin="0 auto" padding-top="0" dir="rtl" style="text-align:right">
+                                <table width="100%" dir="rtl"
+                                       style=" border: 1px solid #ddd; background-color: #FAFAFA ;">
+                                    <tr>
+                                        <td rowspan="4" width="50%" align="right" style="border: 1px solid #ddd;">
+                                            <span>
+                                                <img src="ommat_employee_id/static/description/logo.png" alt="logo"
+                                                     width="150px" height="120px"/>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" width="20%" style="border: 1px solid #ddd;">
+                                            <h6>نوع الوثيقة</h6>
+                                        </td>
+                                        <td align="right" width="30%" style="border: 1px solid #ddd;">
+                                            <h6>نموذج عمل</h6>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" width="20%" style="border: 1px solid #ddd;">
+                                            <h6>مصدر الوثيقة</h6>
+
+                                        </td>
+                                        <td align="right" width="30%" style="border: 1px solid #ddd;">
+                                            <h6>ادارة الموارد البشرية-امات</h6>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" width="20%" style="border: 1px solid #ddd;">
+                                            <h6>رقم الوثيقة</h6>
+                                        </td>
+                                        <td align="right" width="30%" style="border: 1px solid #ddd;">
+                                            <h6>OMM/HR-HR&amp;AD/Policy13/T2</h6>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br/>
+                            <div>
+                                <table width="100%" style="border: 1px solid #ddd; background-color: #EFECEB ;">
+                                    <tr>
+                                        <td width="30%" style="border: 1px solid #ddd;" align="center">
+                                            <h3>بطاقة تقييم الوظائف</h3>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br/>
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+                                        <td text-align="right">
+                                            <h5>أعضاء اللجنه:</h5>
+                                        </td>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.committee_members"/>
+                                            </h5>
+                                        </td>
+                                        <td text-align="right">
+                                            <h5>العائله الوظيفيه:</h5>
+                                        </td>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.family_job"/>
+                                            </h5>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h5>المسمي الوظيفي:</h5>
+                                        </td>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.job_position"/>
+                                            </h5>
+                                        </td>
+                                        <td text-align="right">
+                                            <h5>الادارة:</h5>
+                                        </td>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.department"/>
+                                            </h5>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h5>التاريخ:</h5>
+                                        </td>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.date"/>
+                                            </h5>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div width="100%" align="right" dir="rtl" style="text-align:right">
+                                <table class="report_table" style="border: 1px solid #ddd;" width="100%">
+                                    <tr style="border: 1px solid #ddd;">
+                                        <th text-align="right" style="border: 1px solid #ddd;">الشرح والملاحظات</th>
+                                        <th text-align="right" style="border: 1px solid #ddd;">قيمة التقييم</th>
+                                        <th text-align="right" style="border: 1px solid #ddd;">القيمة الرقمية</th>
+                                    </tr>
+                                    <tr t-foreach="o.evaluation_card_plan" t-as="l" style="border: 1px solid #ddd;">
+                                        <td style="border: 1px solid #ddd;">
+                                            <div>
+                                                <span t-field="l.notes"/>
+                                            </div>
+                                        </td>
+                                        <td style="border: 1px solid #ddd;">
+                                            <div>
+                                                <span t-field="l.evaluation_value"/>
+                                            </div>
+                                        </td>
+                                        <td style="border: 1px solid #ddd;">
+                                            <div>
+                                                <span t-field="l.number_value"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                       <td style="border: 1px solid #ddd;">
+                                            <div>
+
+
+                                            </div>
+                                        </td>
+                                        <th text-align="right" style="border: 1px solid #ddd;">المجموع</th>
+                                        <td style="border: 1px solid #ddd;">
+                                            <div>
+                                                <span t-field="o.total_number_value"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+
+
+

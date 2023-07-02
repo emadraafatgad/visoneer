@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="alarm_dismissal"
+                model="end.service"
+                string="انذار بالفصل"
+                report_type="qweb-pdf"
+                name="ommat_employee_id.alarm_dismissal_ommat"
+                file="ommat_employee_id.alarm_dismissal_ommat"
+        />
+
+        <template id="alarm_dismissal_ommat">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.internal_layout">
+                        <div class="page">
+                            <br/>
+                            <div margin="0 auto" padding-top="0">
+                                <!--                                <br/>-->
+                                <table width="100%" style="border: 1px solid #ddd; background-color: #EFECEB ;">
+                                    <tr>
+                                        <td width="30%" style="border: 1px solid #ddd;">
+                                            <span>
+                                                <img src="ommat_employee_id/static/description/logo.png" alt="logo"
+                                                     width="200px" height="120px"/>
+                                            </span>
+                                        </td>
+                                        <!--                                        <td width="10%"></td>-->
+                                        <!--                                        <td width="10%"></td>-->
+
+                                        <td width="30%" style="border: 1px solid #ddd;" align="center">
+                                            <h3>انذار بالفصل</h3>
+                                        </td>
+                                        <td width="30%" style="border: 1px solid #ddd;" align="center">
+                                            <h3>الشركة العربية لأمات الدواجن</h3>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+
+                                        <td text-align="right">
+                                            <h4>الاسم:</h4>
+                                        </td>
+
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.name"/>
+                                            </h4>
+                                        </td>
+
+                                        <td text-align="right">
+                                            <h4>الرقم الوظيفي:</h4>
+                                        </td>
+
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.emp_barcode"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>الادارة/القسم/الموقع:</h4>
+                                        </td>
+
+                                        <td text-align="right">
+                                            <h4>
+                                                <field t-field="o.dept"/>
+                                            </h4>
+                                        </td>
+
+                                        <td>
+                                            <h4>
+                                                <span>
+                                                    <h2>&amp;nbsp;</h2>
+                                                </span>
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <span>
+                                                    <h2>&amp;nbsp;</h2>
+                                                </span>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>العنوان/الشارع:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.street"/>
+                                            </h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>المدينة:</h4>
+                                        </td>
+
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.city"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>المحافظة:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.governorate"/>
+                                            </h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>الدولة:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.country_name"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <br/>
+                            <br/>
+<!--                            <br/>-->
+<!--                            <br/>-->
+
+                            <div align="right">
+                                <span>
+                                    <h5>،،، بعد التحية </h5>
+                                </span>
+                            </div>
+
+                            <div align="right">
+                                <table align="right" style="text-align:right">
+                                    <tr>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.company_id.law_punishment"/>
+                                            </h5>
+                                        </td>
+                                        <td>
+                                            <h5>
+                                                <h5>&amp;nbsp; تطبيقا ﻻحكام ﻻئحة الجزاءات التأديبية الصادرة بالقانون &amp;nbsp;</h5>
+                                            </h5>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table align="right" style="text-align:right">
+                                        <tr>
+                                            <td>
+                                                <h5>&amp;nbsp; :تنص علي &amp;nbsp;</h5>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                <table align="right" style="text-align:right">
+                                    <tr>
+                                        <td>
+                                            <h5>&amp;nbsp; يجوز فصل العامل اذا تغيب عن العمل بدون سبب مشروع أكثر من
+                                                عشرين يوما متقطعه خلال
+                                                السنة الواحدة او اكثر من عشرة ايام متوالية علي ان يسبق الفصل انذار كتابي
+                                                للعامل بعد غيابه
+                                                عشرة ايام في الحالة الاولي و انقطاعه خمسة ايام في الحالة الثانية &amp;nbsp;</h5>
+                                        </td>
+                                    </tr>
+                                </table>
+
+
+                                <table align="right" style="text-align:right">
+                                    <tr>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.date_to"/>
+                                            </h5>
+                                        </td>
+                                        <td>
+                                            <h5>&amp;nbsp; :الي &amp;nbsp;</h5>
+                                        </td>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.from_date"/>
+                                            </h5>
+                                        </td>
+                                        <td>
+                                            <h5>&amp;nbsp; :يوم خلال الفترة من &amp;nbsp;</h5>
+                                        </td>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.duration_of_work_interruption"/>
+                                            </h5>
+                                        </td>
+                                        <td>
+                                            <h5>&amp;nbsp; وحيث انكم انقطعتم عن العمل مدة &amp;nbsp;</h5>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table align="right" style="text-align:right">
+                                    <tr>
+                                        <td>
+                                            <h5>&amp;nbsp; . لذا ننذركم بالفصل تطبيقا للقانون &amp;nbsp;</h5>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+
+
+                            <div align="center">
+                                <span>
+                                    <h5>،،، واقبلوا التحية ،،،</h5>
+                                </span>
+                            </div>
+
+                            <br/>
+                            <br/>
+
+                            <table align="right" style="text-align:right">
+                                <tr>
+                                    <td>
+                                        <h2>
+                                            &amp;nbsp;.......................................&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                        </h2>
+                                    </td>
+                                    <td>
+                                        <h5>
+                                            <field t-field="o.employees_dept_head"/>
+                                        </h5>
+                                    </td>
+                                    <td>
+                                        <h5>&amp;nbsp; رئيس قسم شئون العاملين &amp;nbsp;</h5>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h2>
+                                            &amp;nbsp;.......................................&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                        </h2>
+                                    </td>
+                                    <td>
+                                        <h5>
+                                            <field t-field="o.hr_head"/>
+                                        </h5>
+                                    </td>
+                                    <td>
+                                        <h5>&amp;nbsp; مدير الموارد البشرية&amp;nbsp;</h5>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h2>
+                                            &amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                        </h2>
+                                    </td>
+                                    <td>
+                                        <h5>
+                                            <field t-field="o.issued_in"/>
+                                        </h5>
+                                    </td>
+                                    <td>
+                                        <h5>&amp;nbsp; تحريرا في&amp;nbsp;</h5>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+
+
+

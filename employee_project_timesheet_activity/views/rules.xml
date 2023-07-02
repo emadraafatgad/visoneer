@@ -1,0 +1,57 @@
+<odoo>
+
+    <record id="working_rules_form" model="ir.ui.view">
+        <field name="name">working.rules.tree</field>
+        <field name="model">working.rules</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Rules">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="branch_id"/>
+                            <field name="company_id"/>
+                        </group>
+                        <group>
+                            <field name="rate"/>
+                            <field name="invoice_rate"/>
+                            <field name="code"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+
+    </record>
+
+    <record id="working_rules_tree" model="ir.ui.view">
+        <field name="name">working.rules.tree</field>
+        <field name="model">working.rules</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Rules">
+                <field name="name"/>
+                <field name="rate"/>
+                <field name="code"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+
+    </record>
+
+    <record id="employees_working_rules" model="ir.actions.act_window">
+        <field name="name">Work.Rules.Action</field>
+        <field name="res_model">working.rules</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_working_rules"
+              name="Rules"
+              parent="menu_employee_main_timesheet_root"
+              action="employees_working_rules"
+              sequence="90"
+    />
+
+
+</odoo>

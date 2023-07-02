@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="report_module_name_report_name"
+            model="account.payment.register"
+            string="Report Name"
+            report_type="qweb-pdf"
+            name="module_name.report_name"
+            file="module_name.report_name"
+            attachment_use="True"
+            attachment="(object.name or 'Report Name').pdf"
+        />
+    </data>
+
+</odoo>

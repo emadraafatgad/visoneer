@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+<!--        <record model="ir.ui.view" id="stock_picking_ema_inherit">-->
+<!--            <field name="name">stock_picking_ema_inherit</field>-->
+<!--            <field name="model">stock.picking</field>-->
+<!--            <field name="inherit_id" ref="stock.view_picking_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='origin']" position="after">-->
+<!--                    <field name="marked"/>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record model="ir.ui.view" id="stock_picking_tree_ema_inherit">-->
+<!--            <field name="name">stock_picking_tree_ema_inherit</field>-->
+<!--            <field name="model">stock.picking</field>-->
+<!--            <field name="inherit_id" ref="stock.vpicktree"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='origin']" position="after">-->
+<!--                    <field name="marked"/>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <record id="compute_payslip_wizard_form_view" model="ir.ui.view">
+            <field name="name">compute_payslip_wizard_form_view</field>
+            <field name="model">compute.payslip</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                            <group>
+                                <field name="payslip"/>
+                            </group>
+                    </sheet>
+                    <footer>
+                        <button name="confirm" type="object" string="Confirm" class="oe_highlight"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+
+
+                </form>
+            </field>
+        </record>
+
+         <record id="compute_payslip_action" model="ir.actions.act_window">
+            <field name="name">Payslip Compute</field>
+            <field name="res_model">compute.payslip</field>
+             <field name="target">new</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <menuitem id="compute_payslip_root_menue"
+                  name="Compute Payslip"
+                  action="compute_payslip_action"
+                  parent="hr_payroll.menu_hr_payroll_root"
+                  sequence="20"
+                  groups="payslip_compute_all.payslip_computations_group"
+        />
+
+
+        <record id="done_payslip_wizard_form_view" model="ir.ui.view">
+            <field name="name">done_payslip_wizard_form_view</field>
+            <field name="model">done.payslip</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                            <group>
+                                <field name="payslip"/>
+                            </group>
+                    </sheet>
+                    <footer>
+                        <button name="confirm" type="object" string="Confirm" class="oe_highlight"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+
+
+                </form>
+            </field>
+        </record>
+
+         <record id="done_payslip_action" model="ir.actions.act_window">
+            <field name="name">Payslip Done</field>
+            <field name="res_model">done.payslip</field>
+            <field name="target">new</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <menuitem id="confirm_payslip_root_menue"
+                  name="Confirm Payslip"
+                  action="done_payslip_action"
+                  parent="hr_payroll.menu_hr_payroll_root"
+                  sequence="20"
+                  groups="payslip_compute_all.payslip_computations_group"
+        />
+
+    </data>
+</odoo>

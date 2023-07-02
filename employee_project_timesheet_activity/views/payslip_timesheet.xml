@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_hr_payslip_timesheet_inherit_form">
+            <field name="name">hr.payslip.timesheet.form</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll_community.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='compute_sheet']" position="after">
+                    <button name="get_attendance_sheets" type="object" class="btn-danger" string="Get Timesheet" states="draft,verify" />
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Timesheet">
+                        <group string="Hours Type">
+                            <group string="Local">
+                                <field name="regular_hours" widget="float_time"/>
+                                <field name="overtime_hours" widget="float_time"/>
+                                <field name="weekend_hours" widget="float_time"/>
+                                <field name="holidays_hours" widget="float_time"/>
+                            </group>
+                            <group string="Global">
+                                <field name="overtime_global" widget="float_time"/>
+                                <field name="weekend_global" widget="float_time"/>
+                                <field name="holidays_global" widget="float_time"/>
+                            </group>
+                        </group>
+                            <field name="timesheet_line_ids" context="{'default_employee_id':employee_id}">
+                                <tree editable="top" string="Timesheet Activities" sample="1" readonly="True">
+                                    <field name="date"/>
+                                    <field name="user_id" invisible="0"/>
+                                    <field name="project_id" required="1" options="{'no_create_edit': True}"/>
+                                    <field name="task_id" optional="show"
+                                           options="{'no_open': True}" widget="task_with_hours"
+                                           context="{'default_project_id': project_id}"
+                                           domain="[('project_id', '=', project_id)]"/>
+                                    <field name="name" optional="hide" required="0"/>
+                                    <field name="unit_amount" string="Hours Spent" optional="show"
+                                           widget="timesheet_uom" sum="Total"
+                                           decoration-danger="unit_amount &gt; 24"/>
+                                    <field name="bill_non"/>
+                                    <field name="time_type"/>
+                                    <field name="company_id" invisible="1"/>
+                                    <!--                                    <field name="user_id" invisible="1"/>-->
+                                </tree>
+                            </field>
+                        </page>
+                </xpath>
+            </field>
+        </record>
+
+</odoo>

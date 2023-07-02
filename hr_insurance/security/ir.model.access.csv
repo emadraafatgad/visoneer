@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+insurance_group,insurance_group,model_emp_insurance,,1,1,1,1
+insurances_percentage_group,insurances_percentage_group,model_insurances_percentage,,1,1,1,1
+insurance_over_age_group,insurance_over_age_group,model_insurances_age,,1,1,1,1
+insurance_history,insurance_history,model_insurance_monthly,,1,1,1,1
+insurance_readonly,insurance_readonly,model_insurance_monthly,insurance_readonly_group,1,0,0,0
+insurance_readonly_emp_insurance,insurance_readonly_emp_insurance,model_emp_insurance,insurance_readonly_group,1,0,0,0
+

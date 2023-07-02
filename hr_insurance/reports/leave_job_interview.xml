@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="interview_left_work"
+                model="left.work"
+                string="مقابلة ترك عمل"
+                report_type="qweb-pdf"
+                name="ommat_employee_id.interview_left_work_template"
+                file="ommat_employee_id.interview_left_work_template"
+        />
+        <template id="interview_left_work_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.internal_layout">
+                         <header class="header">
+                                <div margin="0 auto" padding-top="0">
+                                <table width="100%" style="border: 1px solid #ddd; background-color: #EFECEB ;">
+                                    <tr>
+                                        <td width="30%" style="border: 1px solid #ddd;">
+                                            <span>
+                                                <img src="ommat_employee_id/static/description/logo.png" alt="logo"
+                                                     width="200px" height="120px"/>
+                                            </span>
+                                        </td>
+                                        <td width="30%" style="border: 1px solid #ddd;" align="center">
+                                            <h3>مقابلة ترك عمل</h3>
+                                        </td>
+                                        <td width="30%" style="border: 1px solid #ddd;" align="center">
+                                            <h3>الشركة العربية لأمات الدواجن</h3>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            </header>
+                        <div class="page">
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>الاسم:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.name"/>
+                                            </h4>
+                                        </td>
+
+                                        <td text-align="right">
+                                            <h4>المسمي الوظيفي:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.job_position"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>العنوان/الشارع:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.street"/>
+                                            </h4>
+                                        </td>
+                                             <td text-align="right">
+                                            <h4>المؤهل الدراسي:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.educational_qualification"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>الحالة اﻻجتماعية:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.social_status"/>
+                                            </h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>تاريخ الميلاد:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.date_of_birth"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>المدير المباشر:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.manger_name"/>
+                                            </h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>اخر تقييم اداء حصل عليه:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.latest_performance_evaluation"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>تاريخ الانضمام للعمل:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.date_join_work"/>
+                                            </h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>تاريخ تقديم الاستقالة:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.work_ending_date"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>خط السير الوظيفي منذ الالتحاق:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.career_itinerary"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br/>
+                            <br/>
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>متى قررت أن تترك العمل؟</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.quit_work"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>(1)ما هي اﻻشياء التي ضايقتك وجعلتك تفكر في الاستقالة ؟</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.things_bothered_quitting"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>(2)هل تري ان دورك الحالي في الشركة مناسبا لمؤهلاتك ؟</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.current_in_company_qualification"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>(3)هل تلقيت التدريب الكافي ﻻداء مهام عملك بكل كفاءة ؟</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.work_tasks_efficiently"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>(4)هل الزملاء الحاليين يرحبون بالاشخاص الجدد (المنضمين للعمل حديثا)؟
+                                            </h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.welcome_new_people"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>(5)هل لديك اية اقتراحات لمساعدتنا في ايجاد بديل ؟</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.find_an_alternative"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>(6)هل سترشح اقاربك او اصدقائك للعمل في الشركة ؟</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.work_in_company"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+<!--                            <br/><br/><br/><br/>-->
+<!--                            <br/><br/> <br/><br/>-->
+
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>(7)ما رايك في المكان وبيئة العمل التي كنت تمارس فيها عملك(اضاءة - تهوية
+                                                -
+                                                اثاث - دورات مياه) ؟
+                                            </h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.place_work_environment"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>(8)ما الشئ الذي تراه مميزا في شركتنا عن الشركات اﻻخري ؟</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.advantage_company"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>(9)ما هي المساعدات التي كنت تتلقاها من رئيسك المباشر حتي تستطيع اداء
+                                                عملك
+                                                بكفاءة ؟
+                                            </h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.job_efficiently"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>(10)هل بيئة العمل تساعد علي اﻻبداع ؟</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.work_environment_creativity"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>(11)من من الموظفين الزملاء تتمني لو تستمر في العمل معه (تأسف لتركه) ؟
+                                            </h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.like_continue_working"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>(12)هل انت راضي عن المرتب الذي تتقاضاه ؟</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.salary_receive"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>(13)ماذا كان ينقصك من مهارات وتدريب حتي تصبح في مكان رئيسك الماشر ؟</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.place_your_boss"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>(14)ما هي المهارات التي اضيقت اليك في فترة عملك معنا ؟</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.added_period_work"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+<!--                           <br/><br/><br/><br/>-->
+<!--                            <br/><br/> <br/><br/>-->
+
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>(15)ما اﻻجراءات اﻻصلاحية التي تري انها يتفيد لو تم تطبيقها في اﻻدارة
+                                                التي
+                                                تعمل بها ؟
+                                            </h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.corrective_measures"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>(16)من هو اكثر شخص عاونك علي اداء وظيفتك (بخلاف الرئيس) ؟</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.performing_your_job"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>(17)في حالة استمرارك في العمل كيف تري مستقبلك الوظيفي معنا لثلاث سنوات
+                                                قادمة
+                                                ؟
+                                            </h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.continue_work_career"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>(18)هل تتوقع العمل معنا مرة اخري في المستقبل ؟</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.expect_work_again"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>(19)ماذا تتمني ان تراه في شركتنا من تغييرات حتي تعود مرة اخري للعمل معنا
+                                                ؟
+                                            </h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.back_work_again"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>(20)هل تم تسليم مهام عملك لشخص اخر ؟</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.work_assignments_someone"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td text-align="right">
+                                            <h3>(21)اي تعليقات اخري ؟</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.other_comments"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+<!--                           <br/><br/><br/><br/>-->
+<!--                            <br/>-->
+<!--                            <br/>-->
+<!--                            <br/>-->
+                            <br/>
+                            <div margin="0 auto" padding-top="0" align="right" dir="rtl" style="text-align:right">
+                                <table width="100%" >
+                                    <tr style="border: 1px solid #ddd; background-color: #F5B1A7 ;">
+                                        <td width="30%" style="border: 1px solid #ddd;" align="center">
+                                            <h3>نتائج المقابلة</h3>
+                                        </td>
+                                        <td width="30%" style="border: 1px solid #ddd;" align="center">
+                                            <h3>اهم التوصيات</h3>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="border: 1px solid #ddd; background-color: #F6F0F6 ;">
+                                        <td width="30%" style="border: 1px solid #ddd;" align="center">
+                                            <h4>
+                                                <field t-field="o.interview_results"/>
+                                            </h4>
+                                        </td>
+                                        <td width="30%" style="border: 1px solid #ddd;" align="center">
+                                            <h4>
+                                                <field t-field="o.important_recommendations"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+
+
+

@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="final_quittance_with_company"
+                model="emp.quittance"
+                string="مخالصة نهائية مع الشركة"
+                report_type="qweb-pdf"
+                name="ommat_employee_id.final_quittance_with_company_report_ommat"
+                file="ommat_employee_id.final_quittance_with_company_report_ommat"
+        />
+        <template id="final_quittance_with_company_report_ommat">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.internal_layout">
+                        <div class="page">
+                            <!--                            <style type="text/css">-->
+                            <!--                                table.supplier {-->
+                            <!--                                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;-->
+                            <!--                                border-collapse: collapse;-->
+                            <!--                                width: 100%;-->
+                            <!--                                text-align : center;-->
+                            <!--                                margin :auto;-->
+                            <!--                                }-->
+
+                            <!--                                table.supplier td, table.supplier th {-->
+                            <!--                                border: 1px solid #ddd;-->
+                            <!--                                padding: 8px;-->
+                            <!--                                }-->
+
+                            <!--                                table.supplier tr:nth-child(even){background-color: #f2f2f2;}-->
+
+                            <!--                                table.supplier tr:hover {background-color: #ddd;}-->
+
+                            <!--                                table.supplier th {-->
+                            <!--                                padding-top: 12px;-->
+                            <!--                                padding-bottom: 12px;-->
+                            <!--                                text-align: left;-->
+                            <!--                                background-color: #990000 ;-->
+                            <!--                                color: white;-->
+                            <!--                                text-align : center;-->
+                            <!--                                }-->
+                            <!--                            </style>-->
+
+                            <!--                            <div margin="0 auto" padding-top="0">-->
+                            <br/>
+                            <table width="100%" dir="rtl" style=" border: 1px solid #ddd; background-color: #FAFAFA ;">
+
+                                <tr>
+                                    <td rowspan="4" width="50%" align="right" style="border: 1px solid #ddd;">
+                                        <span>
+                                            <img src="ommat_employee_id/static/description/logo.png" alt="logo"
+                                                 width="150px" height="120px"/>
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td align="right" width="20%" style="border: 1px solid #ddd;">
+                                        <h6>نوع الوثيقة</h6>
+
+                                    </td>
+                                    <td align="right" width="30%" style="border: 1px solid #ddd;">
+
+                                        <h6>نموذج عمل</h6>
+
+                                    </td>
+
+
+                                </tr>
+
+                                <tr>
+                                    <td align="right" width="20%" style="border: 1px solid #ddd;">
+                                        <h6>مصدر الوثيقة</h6>
+
+                                    </td>
+                                    <td align="right" width="30%" style="border: 1px solid #ddd;">
+                                        <h6>ادارة الموارد البشرية-امات</h6>
+
+                                    </td>
+
+
+                                </tr>
+
+                                <tr>
+
+
+                                    <td align="right" width="20%" style="border: 1px solid #ddd;">
+                                        <h6>رقم الوثيقة</h6>
+
+                                    </td>
+
+                                    <td align="right" width="30%" style="border: 1px solid #ddd;">
+                                        <h6>OMM/HR-HR&amp;AD/Policy10/T4</h6>
+
+                                    </td>
+
+
+                                </tr>
+
+
+                            </table>
+                            <!--                            </div>-->
+
+
+                            <br/>
+
+                            <table align="center"
+                                   style="border: 1px solid #ddd; color: white; background-color: #B40404 ;"
+                                   width="100%" hieght="20px">
+                                <tr>
+                                    <td align="center">
+                                        <h3>
+                                            مخالصة نهائية مع الشركة
+                                        </h3>
+
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+
+
+                            <div align="right">
+                                <table width="100%" align="right" dir="rtl" style="text-align:right">
+                                    <tr>
+
+                                        <td>
+                                            <h4>اقر انا الموقع ادناه/</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.name"/>
+                                            </h4>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td>
+                                            <h4> المقيم في دولة:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.country_name"/>
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <h4>محافظة:</h4>
+                                        </td>
+                                         <td>
+                                            <h4>
+                                                <field t-field="o.governorate"/>
+                                            </h4>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4> مدينة:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.city"/>
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <h4> بطاقة رقم وطني/إقامة:</h4>
+                                        </td>
+                                         <td>
+                                            <h4>
+                                                <field t-field="o.identification_no"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                                <br/>
+                                <br/>
+
+                            </div>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+
+                            <div align="right">
+
+                                <table align="right" dir="rtl" style="text-align:right">
+                                    <tr>
+
+                                        <td>
+                                            <h5>وحيث ان عملي بالشركة</h5>
+                                        </td>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.company_id"/>
+                                            </h5>
+                                        </td>
+                                        <td>
+                                            <h5> &amp;nbsp; قد انتهي من تاريخ  &amp;nbsp;</h5>
+                                        </td>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.leaving_date"/>
+                                            </h5>
+                                        </td>
+
+
+                                    </tr>
+
+                                </table>
+                                <table align="right" width="80%" dir="rtl" style="text-align:right">
+                                    <tr>
+                                        <td>
+                                            <h5>اقر بأنني قد استلمت جميع مستحقاتي من الشركة</h5>
+                                        </td>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.company_id"/>
+                                            </h5>
+                                        </td>
+                                         <td>
+                                            <h5>&amp;nbsp; والبالغة&amp;nbsp;</h5>
+                                        </td>
+
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.total_financial_dues"/>
+                                            </h5>
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+
+                                <table align="right" width="100%" dir="rtl" style="text-align:right">
+                                    <tr>
+                                        <td>
+                                            <h5>والناشئة عن علاقة العمل مع الشركة.وتشمل تلك المستحقات علي سبيل
+                                                المثال وليس الحصر بدل الرواتب المستحقة لي وتعويض
+                                                نهاية الخدمة وبدل الاجازات السنوية
+                                                غير
+                                                المستغلة وبدل الحوافز والمكافأت
+                                                 وبدل العمل الاضافي واية بدلات اوتعويضات اخري
+                                                تستحق لي بحكم عملي ووظيفتي في الشركة.
+                                            </h5>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table align="right" width="100%" dir="rtl" style="text-align:right">
+
+                                    <tr>
+                                        <td>
+                                            <h5>
+                                                       وانني بهذا ابرأ ذمة الشركة
+
+                                            </h5>
+
+                                        </td>
+                                         <td>
+                                            <h5>
+                                                <field t-field="o.company_id"/>
+                                            </h5>
+                                        </td>
+                                        <td>
+                                            <h5>
+                                                    وكافة الشركات التابعة لها والشقيقة ابراءا تاما وشاملا من اية
+
+                                            </h5>
+
+                                        </td>
+
+                                    </tr>
+                                </table>
+
+                                <table align="right" width="100%" dir="rtl" style="text-align:right">
+                                    <tr>
+                                        <td>
+                                            <h5>
+                                                  مطالبات
+                                                أنية او مستقبلية وليس لي الحق بعد انتهاء علاقة العمل بيني وبين
+                                                الشركة
+                                                بمطالبتها ياية مبالغ مالية اخري عن فترة عملي لديها.كماانني اقر بانني
+                                                قد
+                                                استلمت جميع مستندات التعيين الخاصة بي لدي الشركة
+                                                وليس لي طرف الشركة اي مستندات اخري.
+                                            </h5>
+
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table align="right" width="100%" dir="rtl" style="text-align:right">
+                                    <tr>
+
+
+                                        <td>
+                                            <h5>
+
+                                                كما انني اقر بانه ليس لدي الحق
+                                                بمقاضاة الشركة
+
+
+                                            </h5>
+
+                                        </td>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.company_id"/>
+                                            </h5>
+                                        </td>
+                                         <td>
+                                            <h5>
+
+                                                او اي من الشركات التابعة لها او الشقيقة
+
+
+                                            </h5>
+
+                                        </td>
+
+                                    </tr>
+                                </table>
+
+                                <table align="right" width="75%" dir="rtl" style="text-align:right">
+                                    <tr>
+
+
+
+                                        <td>
+                                            <h5>
+
+                                                 لدي اي من المحاكم سواء داخل
+                                            </h5>
+
+                                        </td>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.work_country"/>
+                                            </h5>
+                                        </td>
+                                        <td>
+                                            <h5>
+
+                                                او خارجها
+                                            </h5>
+
+                                        </td>
+                                    </tr>
+                                </table>
+
+
+                            </div>
+
+
+                            <div align="center">
+                                <span>
+
+                                    <h4>،،، وهذا اقرار مني بذلك ،،،</h4>
+
+                                </span>
+                            </div>
+
+                            <br/>
+                            <br/>
+                            <br/>
+
+                            <table>
+                                <tr>
+                                    <td>
+                                        <h2>...................</h2>
+                                    </td>
+                                    <td>
+                                        <h5>الاسم</h5>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h2>...................</h2>
+                                    </td>
+                                    <td>
+                                        <h5>التوقيع</h5>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h2>...................</h2>
+                                    </td>
+                                    <td>
+                                        <h5>التاريخ</h5>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                        <!--                            <br/><br/><br/><br/><br/><br/><br/><br/><br/>-->
+                        <!--                        </div>-->
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+
+
+

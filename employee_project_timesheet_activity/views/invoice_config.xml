@@ -1,0 +1,58 @@
+<odoo>
+
+    <record id="invoice_config_overtime_form" model="ir.ui.view">
+        <field name="name">invoice.config.overtime.form</field>
+        <field name="model">invoice.config.overtime</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Rules">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="travel_rate"/>
+                            <field name="monday_saturday_overtime"/>
+                        </group>
+                        <group>
+                            <field name="sunday_holiday_overtime"/>
+                            <field name="per_diem"/>
+                            <field name="company_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+
+    </record>
+
+    <record id="invoice_config_overtime_tree" model="ir.ui.view">
+        <field name="name">invoice.config.overtime.tree</field>
+        <field name="model">invoice.config.overtime</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Rules">
+                <field name="travel_rate"/>
+                <field name="monday_saturday_overtime"/>
+                <field name="sunday_holiday_overtime"/>
+                <field name="per_diem"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+
+    </record>
+
+    <record id="employees_invoice_config_overtime" model="ir.actions.act_window">
+        <field name="name">Invoice.config.Overtime.Action</field>
+        <field name="res_model">invoice.config.overtime</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_invoice_config_overtime"
+              name="Invoice Overtime Rate"
+              groups="employee_project_timesheet_activity.group_project_timesheet_manager"
+              parent="menu_employee_main_timesheet_root"
+              action="employees_invoice_config_overtime"
+              sequence="90"
+    />
+
+
+</odoo>

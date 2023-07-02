@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="work_receipt_notification_report"
+                model="work.receipt"
+                string="اخطار استلام عمل"
+                report_type="qweb-pdf"
+                name="ommat_employee_id.work_receipt_notification_ommat"
+                file="ommat_employee_id.work_receipt_notification_ommat"
+        />
+        <template id="work_receipt_notification_ommat">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.internal_layout">
+                        <div class="page">
+                            <br/>
+                            <div margin="0 auto" padding-top="0">
+                                <!--                                <br/>-->
+                                <table width="100%" style="border: 1px solid #ddd; background-color: #EFECEB ;">
+                                    <tr>
+                                        <td width="30%" style="border: 1px solid #ddd;">
+                                            <span>
+                                                <img src="ommat_employee_id/static/description/logo.png" alt="logo"
+                                                     width="200px" height="120px"/>
+                                            </span>
+                                        </td>
+                                        <td width="30%" style="border: 1px solid #ddd;" align="center">
+                                            <h3>اخطار استلام عمل</h3>
+                                        </td>
+                                        <td width="30%" style="border: 1px solid #ddd;" align="center">
+                                            <h3>الشركة العربية لأمات الدواجن</h3>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+
+                            <div align="right" dir="rtl" style="text-align:right">
+                                <table width="100%">
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>رقم الموظف:</h4>
+                                        </td>
+
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.emp_code"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>الادارة:</h4>
+                                        </td>
+
+                                        <td text-align="right">
+                                            <h4>
+                                                <field t-field="o.emp_dpet"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>القسم:</h4>
+                                        </td>
+
+                                        <td text-align="right">
+                                            <h4>
+                                                <field t-field="o.dept"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+
+                                    <br/>
+                                    <br/>
+
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>الي السيد:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.coming_to"/>
+                                            </h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>قادم لسيادتكم السيد:</h4>
+                                        </td>
+
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.name"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text-align="right">
+                                            <h4>والذي تم تعيينه بتاريخ:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.date_of_hiring"/>
+                                            </h4>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>بوظيفة:</h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <field t-field="o.job_position"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+
+                            <table align="right" style="text-align:right">
+                                <tr>
+                                    <td>
+                                        <h2>
+                                            &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                        </h2>
+                                    </td>
+                                    <td>
+                                        <h5>
+                                            <field t-field="o.hr_head"/>
+                                        </h5>
+                                    </td>
+                                    <td>
+                                        <h5>&amp;nbsp; مدير الموارد البشرية&amp;nbsp;</h5>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h2>
+                                            &amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                        </h2>
+                                    </td>
+                                    <td>
+                                        <h5>
+                                            <field t-field="o.issued_in"/>
+                                        </h5>
+                                    </td>
+                                    <td>
+                                        <h5>&amp;nbsp; تحريرا في&amp;nbsp;</h5>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+
+
+

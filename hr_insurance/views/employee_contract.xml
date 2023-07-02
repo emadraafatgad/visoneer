@@ -1,0 +1,170 @@
+<odoo>
+    <data>
+
+        <!--        <template id="assets_backend" name="static_resources_demo assets" inherit_id="web.assets_backend">-->
+        <!--            <xpath expr="." position="inside">-->
+        <!--                <link rel="stylesheet" href="/hr_insurance/css/style.css"/>-->
+        <!--            </xpath>-->
+        <!--        </template>-->
+
+        <record id="hr_contract_point_hr_view" model="ir.ui.view">
+            <field name="name">hr_contract_point_hr_view</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='salary']" position="inside">
+
+                    <label for="work_overtime"/>
+                    <div class="o_row" name="work_overtime">
+                        <field name="work_overtime" nolabel="1"/>
+                        <span>/ month</span>
+                    </div>
+                    <label for="bounce"/>
+                    <div class="o_row" name="bounce">
+                        <field name="bounce" nolabel="1"/>
+                        <span>/ month</span>
+                    </div>
+                    <label for="annual_raise"/>
+                    <div class="o_row" name="annual_raise">
+                        <field name="annual_raise" nolabel="1"/>
+                        <span>/ month</span>
+                    </div>
+                    <label for="retroactive_raise"/>
+                    <div class="o_row" name="retroactive_raise">
+                        <field name="retroactive_raise" nolabel="1"/>
+                        <span>/ month</span>
+                    </div>
+                    <label for="total_salary"/>
+                    <div class="o_row" name="total_salary">
+                        <field name="total_salary" nolabel="1"/>
+                        <span>/ month</span>
+                    </div>
+                </xpath>
+                <xpath expr="//notebook/page[@name='other']" position="after">
+                    <page name="social_insurance" string="التأمينات الاجتماعية">
+                        <group>
+                            <group>
+                                <field name="social_insurances"/>
+                                <field name="form_registration_date"
+                                       attrs="{'invisible':[('social_insurances','!=', 'insured')]}"/>
+                                <field name="form_six_date"/>
+                                <field name="non_insurance_reason"
+                                       attrs="{'invisible':[('social_insurances','!=', 'not_insured')]}"/>
+                                <field name="insurances_calculation"
+                                       attrs="{'invisible':[('social_insurances','!=', 'insured')]}"/>
+                                <div id="supplier">
+                                    <group>
+                                        <field name="insurance_number"
+                                        />
+                                    </group>
+                                </div>
+                                <field name="insurance_date_start"
+                                       invisible="1"/>
+                                <field name="register_method"
+                                       attrs="{'invisible':[('social_insurances','!=', 'insured')]}"/>
+                                <field name="insurance_status" invisible="1"/>
+
+                            </group>
+                            <group>
+                                <field name="modified_salary"
+                                       attrs="{'invisible':['|',('social_insurances','!=', 'insured'),('insurances_calculation','!=', 'modified_salary')]}"/>
+                                <label for="over_age"
+                                       attrs="{'invisible':[('social_insurances','!=', 'insured')],'required':[('social_insurances','=', 'insured')]}"/>
+                                <div attrs="{'invisible':[('social_insurances','!=', 'insured')],'required':[('social_insurances','=', 'insured')]}">
+                                    <field name="over_age" class="oe_inline"/>Years
+                                </div>
+                                <field name="date_of_birth"
+                                       attrs="{'invisible':[('social_insurances','!=', 'insured')]}"/>
+                                <label for="current_emp_age"
+                                       attrs="{'invisible':[('social_insurances','!=', 'insured')]}"/>
+                                <div attrs="{'invisible':[('social_insurances','!=', 'insured')]}">
+                                    <field name="current_emp_age" class="oe_inline"/>Years
+                                </div>
+                                <field name="now_date" invisible="1"/>
+                                <!--                                 <field name="over_age" attrs="{'invisible':[('social_insurances','!=', 'insured')],'required':[('social_insurances','=', 'insured')]}"/>-->
+                                <field name="company_percentage"
+                                       attrs="{'invisible':[('social_insurances','!=', 'insured')]}"/>
+                                <field name="employee_percentage"
+                                       attrs="{'invisible':[('social_insurances','!=', 'insured')]}"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page name="history_insurance" string="Insurance History">
+                        <field name="insurance_table">
+                            <tree editable="bottom" create="false">
+                                <field name="date"/>
+                                <field name="emp_amount"/>
+                                <field name="company_amount"/>
+                            </tree>
+                        </field>
+                        <group>
+                            <field name="total_insurance" string="Total Employee Percentage"/>
+                            <field name="total_insurance_company" string="Total Company Percentage"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+
+
+        </record>
+        <record id="hr_contract_search_hr_view" model="ir.ui.view">
+            <field name="name">hr_contract_search_hr_view</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="insurance_number"/>
+                </xpath>
+            </field>
+
+
+        </record>
+
+        <record id="hr_employee_insurance_inherit_form_view" model="ir.ui.view">
+            <field name="name">hr_employee_insurance_inherit_form_view</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='mobile_phone']" position="after">
+                    <field name="internal_number"/>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Contract Information" name="contract_info">
+                        <group>
+                            <group>
+                                <field name="contract_end_date"/>
+                                <field name="form_registration_date"/>
+                                <field name="social_insurances"/>
+                                <field name="company_percentage"/>
+                                <field name="company_period" force_save="1"/>
+                                <field name="employee_period" force_save="1"/>
+                            </group>
+                            <group>
+                                <field name="insurance_number"/>
+                                <field name="register_method"/>
+                                <field name="insurance_status" invisible="1"/>
+                                <field name="employee_percentage"/>
+                                <field name="medic_exam"/>
+                            </group>
+                        </group>
+                    </page>
+
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="hr_emp_inherit_inss_search_view" model="ir.ui.view">
+            <field name="name">hr_emp_inherit_inss_search_view</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_filter"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="insurance_number"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

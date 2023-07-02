@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="working_employee_comp_rule" model="ir.rule">
+            <field name="name">Employee Working multi company rule</field>
+            <field name="model_id" ref="model_working_days"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="personal_emp_working_days" model="ir.rule">
+            <field name="name">Personal Emp Working Days</field>
+            <field ref="model_working_days" name="model_id"/>
+            <field name="domain_force">[('user','=',user.id)]</field>
+<!--            <field name="groups" eval="[(4, ref('bonus_and_commission.my_own_group'))]"/>-->
+        </record>
+
+         <record id="all_emp_working_days" model="ir.rule">
+            <field name="name">All Emp Working Days</field>
+            <field ref="model_working_days" name="model_id"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+<!--            <field name="groups" eval="[(4, ref('bonus_and_commission.my_all_group'))]"/>-->
+        </record>
+
+
+
+
+
+
+
+
+
+
+    </data>
+</odoo>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="account_move_overimte_inherit_bms">
+        <field name="name">view.order.form.inherit.overtime</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='other_information']" position="after">
+                <page name="overtime" string="OverTime">
+                    <group>
+                        <group name="overtime">
+                            <field name="travel_rate"/>
+                            <field name="monday_saturday_overtime"/>
+                            <field name="sunday_holiday_overtime"/>
+                        </group>
+                        <group name="per_diem">
+                            <field name="per_diem"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="project_id"/>
+                <label for="to_invoice_from" string="To Invoice" id="label_dates"/>
+                        <div>
+                            <div class="o_row o_row_readonly">
+                                <span class="oe_inline">
+                                    From
+                                </span>
+                                <field name="to_invoice_from" class="oe_inline" nolabel="1"
+                                    widget="daterange" options="{'related_end_date': 'to_invoice_to'}"/>
+                                <span class="oe_inline">
+                                    To
+                                </span>
+                                <field name="to_invoice_to" class="oe_inline"
+                                    widget="daterange" options="{'related_start_date': 'to_invoice_from'}"/>
+                            </div>
+                        </div>
+            </xpath>
+             <xpath expr="//page/field[@name='order_line']/tree/field[@name='product_id']" position="after">
+                <field name="employee_ids" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+         <record id="tax_segments_part2_form" model="ir.ui.view">
+            <field name="name">tax_segments_part2_form</field>
+            <field name="model">tax.part</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                    <group>
+                        <group>
+                            <field name="slide"/>
+                        </group>
+                        <group>
+                            <field name="amount_from"/>
+                            <field name="to"/>
+                        </group>
+                    </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="tax_segments_part2_tree" model="ir.ui.view">
+            <field name="name">tax_segments_part2_tree</field>
+            <field name="model">tax.part</field>
+            <field name="arch" type="xml">
+                <tree >
+                    <field name="slide"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="tax_segments_part_action" model="ir.actions.act_window">
+            <field name="name">Tax Part2</field>
+            <field name="res_model">tax.part</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="tax_segments_part2_menu"
+                  name="Tax Part2"
+                  action="tax_segments_part_action"
+                  parent="tax_menu_root"
+                  sequence="2"
+        />
+    </data>
+</odoo>

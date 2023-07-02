@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_hr_payslip_timesheet_inherit_form">
+        <field name="name">hr.payslip.timesheet.form</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll_community.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='compute_sheet']" position="after">
+                <button name="get_employee_attendance_sheets" type="object" class="btn-danger" string="Get attendance"
+                        states="draft,verify"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Attendance">
+                    <group>
+
+                        <group string="Hours Type">
+                            <field name="working_hours" widget="float_time"/>
+                            <field name="actual_worked_hours" widget="float_time"/>
+                            <field name="deduction_hours" widget="float_time"/>
+                        </group>
+                        <group string="Amounts">
+                            <field name="hour_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="deduction_amount" widget="monetary"
+                                   options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                    </group>
+                    <field name="attendance_sheet_line_ids" context="{'default_employee_id':employee_id}">
+                        <tree string="Employee attendances" create="0" edit="0" sample="1">
+                            <field name="employee_id"/>
+                            <field name="check_in"/>
+                            <field name="check_out"/>
+                            <field name="worked_hours" string="Work Hours" sum="Total" widget="float_time"/>
+                        </tree>
+
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
