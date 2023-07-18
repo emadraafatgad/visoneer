@@ -12,7 +12,7 @@ class WorkingDays(models.Model):
     name = fields.Many2one('hr.employee',string='Employee')
     dept = fields.Many2one('hr.department', string='Department', related='name.department_id')
     emp_id = fields.Char(string='Identification No', related='name.identification_id')
-    mobile = fields.Char(string='Mobile', related='name.mobile_phone')
+    mobile = fields.Char(string='Mobile',)
     company_id = fields.Many2one('res.company', readonly=True, default=lambda self: self.env.user.company_id)
     internal_number = fields.Char(string="Internal Employee Number", related='name.internal_number')
     employee_number = fields.Char(string="Employee Number", readonly=False, related='name.employee_number')

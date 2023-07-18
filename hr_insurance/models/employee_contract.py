@@ -182,6 +182,40 @@ class InsuranceMonthlyRecords(models.Model):
     inv_history = fields.Many2one('hr.contract')
 
 
+class HREmployee(models.Model):
+    _inherit = 'hr.employee.public'
+
+    hiring_date = fields.Date(string='Hiring Date', store=True, copy=True)
+    hiring_date = fields.Date(string='Hiring Date', store=True, copy=True)
+    internal_number = fields.Char(string="Tawzef Number")
+
+    employee_number = fields.Char(string="Client Number", store=True)
+    contract_end_date = fields.Date('Contract End Date')
+    medic_exam = fields.Char()
+    form_registration_date = fields.Date(string='تاريخ تسجيل الاستمارة', )
+    social_insurances = fields.Selection([
+        ('insured', "مؤمن عليه"),
+        ('not_insured', "غير مؤمن عليه"),
+    ], string='التأمينات الاجتماعية', default='not_insured')
+    insurance_number = fields.Char(string='الرقم التأميني')
+    register_method = fields.Selection([
+        ('token', "Token"),
+        ('office', "Office"),
+    ], string='طريقة التسجيل', default='token')
+    insurance_status = fields.Selection([
+        ('open', "Open"),
+        ('paid', "Paid"),
+    ], string='حالة التأمين', default='open')
+
+    company_percentage = fields.Float(string='نسبة الشركة', readonly=True)
+    employee_percentage = fields.Float(string='نسبة الموظف', readonly=True)
+    company_period = fields.Float(string='نسبة الشركة خلال الفترة', readonly=True, store=True)
+    employee_period = fields.Float(string='نسبة الموظف خلال الفترة', readonly=True, store=True)
+    working_schedule = fields.Many2one('work.schedule')
+    service_id = fields.Many2one('product.product', domain="[('type','=','service')]", string="Current Service",
+                                 tracking=True)
+    branch_id = fields.Many2one('res.branch')
+
 class HREmployeeContractInsurance(models.Model):
     _inherit = 'hr.employee'
 

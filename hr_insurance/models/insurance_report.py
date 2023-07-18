@@ -186,7 +186,7 @@ class PartnerXlsx(models.AbstractModel):
                 sheet.write(line_number, 0, line.name , format)
                 sheet.write(line_number, 1, line.name_in_arabic, format)
                 sheet.write(line_number, 2, line.company_id.name, format)
-                sheet.write(line_number, 3, line.mobile_phone, format)
+                sheet.write(line_number, 3, line.mobile, format)
                 sheet.write(line_number, 4, line.employee_number, format)
                 sheet.write(line_number, 5, line.internal_number, format)
                 sheet.write(line_number, 6, line.job_id.name, format)

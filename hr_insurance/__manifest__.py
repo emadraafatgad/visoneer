@@ -8,7 +8,7 @@
     'license': 'LGPL-3',
     'website': '',
     'summary': '',
-    'depends': ['base','hr_payroll_community','report_xlsx'],
+    'depends': ['base','hr_payroll_community','branch','report_xlsx'],
     'data': [
 
            'security/contact.xml',
