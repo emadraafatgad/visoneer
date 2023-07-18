@@ -256,10 +256,30 @@ class AccountAnalyticLine(models.Model):
 class EmployeeProjectTimeSheet(models.Model):
     _name = 'employee.project.timesheet'
 
+
+
+    @api.model
+    def _default_user(self):
+        if self.employee_id.user_id:
+            user = self.employee_id.user_id
+        else:
+            user = self.env.user
+            employee = self.env.user.employee_id
+        return self.env.context.get('user_id', user.id)\
+
+    @api.model
+    def _default_employee(self):
+        if self.user_id:
+            employee = self.user_id.employee_id
+        else:
+            employee = self.env.user.employee_id
+        return self.env.context.get('employee_id',employee)
+
+
     name = fields.Char(required=False)
     active = fields.Boolean(default=True)
     project_id = fields.Many2many('project.project', required=False)
-    employee_id = fields.Many2one('hr.employee', required=False)
+    employee_id = fields.Many2one('hr.employee', required=False,default=_default_employee,readonly=True)
     date_from = fields.Date(required=False, compute='get_date_from_date_to_from_schedule', store=True)
     date_to = fields.Date(required=False, compute='get_date_from_date_to_from_schedule', store=True)
     work_schedule_id = fields.Many2one('work.schedule', domain="[('employee_ids','in',employee_id)]", required=True)
@@ -277,6 +297,8 @@ class EmployeeProjectTimeSheet(models.Model):
     timeoff_hours = fields.Float(compute='compute_timesheet_hours')
     invoice_id = fields.Many2one('account.move', string='Invoice Timesheet', store=True,
                                  compute='get_invoice_move_id_from_timesheet', )
+
+    user_id = fields.Many2one('res.users', string='User', default=_default_user,readonly=True)
 
     @api.depends('work_schedule_id')
     def get_date_from_date_to_from_schedule(self):
@@ -346,15 +368,6 @@ class EmployeeProjectTimeSheet(models.Model):
             self.date_from = self.work_schedule_id.date_from
             self.date_to = self.work_schedule_id.date_to
 
-    @api.model
-    def _default_user(self):
-        if self.employee_id.user_id:
-            user = self.employee_id.user_id
-        else:
-            user = self.env.user
-        return self.env.context.get('user_id', user.id)
-
-    user_id = fields.Many2one('res.users', string='User', default=_default_user)
 
     # onchange if not employee not allow add aline or constains all line have the same employee and not empty
 
