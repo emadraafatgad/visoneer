@@ -34,6 +34,7 @@
 
                                     <field name="currency_id" invisible="0"/>
                                 </group>
+                                <!--                                <field name="message_main_attachment_id"  />-->
                             </group>
                         </sheet>
                     </form>
@@ -48,9 +49,15 @@
                         <field name="total_amount" sum="Total"/>
                         <field name="amount" string="Expense" invisible="1" sum="Total"/>
                         <field name="currency_id" invisible="0"/>
+                        <field name="exchange_rate"/>
+                        <field name="invoice_amount" sum="Total"/>
                         <field name="bill_non"/>
                         <field name="company_id" invisible="1"/>
                         <field name="state" invisible="1"/>
+                        <field name="sheet_id" invisible="1"/>
+                        <field name="attachment_number" invisible="1"/>
+                        <widget name="attach_document" string="Attach Receipt" action="attach_document" highlight="1"
+                                attrs="{'invisible': ['|',('attachment_number', '&gt;=', 1), ('id','=',False)]}"/>
                     </tree>
                     <form string="Expenses">
                         <sheet string="Expenses">
@@ -76,7 +83,8 @@
                 </field>
                 <field name="per_diem" invisible="1"/>
                 <field name="employee_id" invisible="1"/>
-                <field name="other_expense_ids" string="Other expenses" context="{'default_project_id': project_id,'default_employee_id': employee_id,'default_amount':per_diem,'default_currency_id': currency_id}"
+                <field name="other_expense_ids" string="Other expenses"
+                       context="{'default_project_id': project_id,'default_employee_id': employee_id,'default_amount':per_diem,'default_currency_id': currency_id}"
                        attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund'))]}">
                     <tree editable="top" string="Other Expenses " sample="1">
                         <field name="date" string="date"/>

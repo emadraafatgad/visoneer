@@ -29,6 +29,13 @@ class HrExpenses(models.Model):
                                copy=True, states={'draft': [('readonly', False)], 'reported': [('readonly', False)],
                                                   'approved': [('readonly', False)], 'refused': [('readonly', False)]},
                                digits='Product Price')
+    exchange_rate = fields.Float(default=1)
+    invoice_amount = fields.Monetary(compute='calc_invoice_amount_in_rate',currency_field='move_id.currency_id')
+
+    @api.depends('exchange_rate','total_amount')
+    def calc_invoice_amount_in_rate(self):
+        for rec in self:
+            rec.invoice_amount = rec.total_amount/rec.exchange_rate
 
     @api.onchange('unit_amount')
     def change_expense_amount_from_amount(self):

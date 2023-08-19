@@ -5,7 +5,7 @@
     "category": "Timesheet",
     "version": "0.0.9",
     "license": "AGPL-3",
-    "depends": ['hr_timesheet', 'project', 'branch', 'hr_payroll_community','hr_expense'],
+    "depends": ['hr_timesheet', 'account','project', 'branch', 'hr_payroll_community','hr_expense'],
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
@@ -20,6 +20,7 @@
         "views/account_move.xml",
         'views/payslip_timesheet.xml',
         "views/rules.xml",
+        "reports/report_invoice.xml",
     ],
     "application": True,
     "development_status": "Beta",

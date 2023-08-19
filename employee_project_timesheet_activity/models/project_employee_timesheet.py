@@ -72,6 +72,7 @@ class AccountAnalyticLine(models.Model):
     def create_invoice_from_attendance(self):
         print("==========-Start-=============")
         for rec in self:
+            print(rec)
             if rec.bill_non == 'non' or rec.unit_amount == 0 or rec.invoice_id or rec.time_type not in ['regular',
                                                                                                         'overtime',
                                                                                                         'weekend',
@@ -144,42 +145,32 @@ class AccountAnalyticLine(models.Model):
                 total_quantity = rec.unit_amount
                 overtime_quantity = 0
                 overtime_invoice_line = self.env['account.move.line']
-                print(invoice_line, " invoice_line")
+                print(invoice_line, " invoice_line",invoice_time_tpye)
                 if invoice_line:
                     print("if Invoice Line For -------------------------------{}".format(rec.id))
                     quant = invoice_line.quantity + rec.unit_amount
-                    # quant = invoice_line.quantity + rec.unit_amount
-                    print("quant before 50")
-                    print(quant)
-                    print(invoice_time_tpye)
+                    print(quant, invoice_line.quantity ,rec.unit_amount)
+                    print("quant before 50",quant,invoice_time_tpye)
                     if quant > 50 and invoice_time_tpye == 'regular':
-                        print(quant)
-                        print("quant after 50")
+                        print("quant after 50",quant)
                         total_quantity = 50
                         overtime_quantity = quant - 50
-                        print("overtime_quantityovertime_quantity")
-                        print(overtime_quantity)
+                        print(overtime_quantity,"overtime_quantityovertime_quantity")
                         overtime_invoice_line = invoice.invoice_line_ids.filtered(
                             lambda x: x.time_type == 'overtime')
-                        print("overtime_invoice_line in check ine")
-                        print(overtime_invoice_line)
-                        print(overtime_invoice_line.quantity)
+                        print("overtime_invoice_line in check ine",overtime_invoice_line,overtime_invoice_line.quantity)
                     else:
-                        total_quantity = invoice_line.quantity + rec.unit_amount
-
-                    print("total_quantity")
-                    print(total_quantity)
-                    print("overtime_quantity")
-                    print(overtime_quantity)
+                        total_quantity = quant
+                    print("total_quantity",total_quantity,'overtime_quantity',overtime_quantity)
                     print(overtime_invoice_line, overtime_quantity, invoice_line)
                     if overtime_invoice_line and overtime_quantity:
                         qty = overtime_invoice_line['quantity']
-                        print(qty)
-                        print(overtime_invoice_line.quantity + overtime_quantity)
+                        print(qty,overtime_invoice_line.quantity + overtime_quantity)
                         print({
                             'quantity': overtime_invoice_line.quantity + overtime_quantity,
                             'price_unit': price_overtime})
                         print(overtime_invoice_line.id)
+                        print("i will write overtime here")
                         invoice.write({'invoice_line_ids': [(1, overtime_invoice_line.id, {
                             'quantity': overtime_invoice_line.quantity + overtime_quantity,
                             'price_unit': price_overtime,
@@ -195,25 +186,33 @@ class AccountAnalyticLine(models.Model):
                             'week_number': week_number,
                             'time_type': 'overtime',
                         }
+                        print("invoice line overtime",invoice_line)
                         invoice['invoice_line_ids'] = [(0, None, val)]
                         invoice._recompute_dynamic_lines(recompute_all_taxes=False)
-                    invoice.write({'invoice_line_ids': [(1, invoice_line.id, {
+                    print(invoice_line,'invoice_line')
+                    print("i will write bas here")
+                    print(invoice_line)
+                    write_out= invoice.write({'invoice_line_ids': [(1, invoice_line.id, {
                         'quantity': total_quantity,
                         'price_unit': price_unit if invoice_time_tpye == 'regular' else price_overtime,
                     })]})
-                    print("write done", total_quantity)
-                    print(invoice.invoice_line_ids)
+                    print("write done", total_quantity,write_out)
+                    # print(invoice_line,'write done',invoice_line.quantity)
+                    print(invoice.invoice_line_ids,invoice.invoice_line_ids.mapped('quantity'))
+
                 else:
                     print("If Not")
                     val = {
                         'product_id': quotation_line.product_id.id,
+                        'quantity': total_quantity,
                         'name': inv_name_msg[invoice_time_tpye],
                         'account_id': quotation_line.product_id.property_account_income_id.id,
-                        'quantity': total_quantity,
                         'discount': discount,
                         'price_unit': price_unit if invoice_time_tpye == 'regular' else price_overtime,
                         'week_number': week_number,
                         'time_type': invoice_time_tpye,
+                        'move_id': invoice.id,
+
                     }
                     print(rec.unit_amount)
                     print(val)
@@ -221,7 +220,33 @@ class AccountAnalyticLine(models.Model):
                     invoice['invoice_line_ids'] = [(0, None, val)]
                     print(invoice['invoice_line_ids'])
                     invoice._recompute_dynamic_lines(recompute_all_taxes=False)
+                    print("========================-----------------------=================================")
+                    print("Invoice line created")
+                    invoice_line = self.env['account.move.line'].search(
+                        [('move_id', '=', invoice.id), ('week_number', '=', week_number),
+                         ('time_type', '=', invoice_time_tpye)])
+                    print(invoice_line.quantity)
+                    val = {
+                        'product_id': quotation_line.product_id.id,
+                        'quantity': total_quantity + 0,
+                        'name': inv_name_msg[invoice_time_tpye],
+                        'account_id': quotation_line.product_id.property_account_income_id.id,
+                        'discount': discount,
+                        'price_unit': price_unit if invoice_time_tpye == 'regular' else price_overtime,
+                        'week_number': week_number,
+                        'time_type': invoice_time_tpye,
+                        'move_id':invoice.id,
 
+                    }
+                    print(val)
+                    invoice.write({'invoice_line_ids': [(1, invoice_line.id, val)]})
+                    # print("after",invoice_line.quantity)
+                    print(rec.unit_amount)
+                    print(val)
+                    print("invoice")
+                    # invoice['invoice_line_ids'] = [(0, None, val)]
+                    print(invoice['invoice_line_ids'])
+                    invoice._recompute_dynamic_lines(recompute_all_taxes=False)
             else:
                 create_values = {
                     'product_id': quotation_line.product_id.id,
@@ -249,7 +274,7 @@ class AccountAnalyticLine(models.Model):
                             (0, None, create_values)]
                     })
                 print(invoice)
-                invoice._recompute_dynamic_lines(recompute_all_taxes=False, recompute_tax_base_amount=False)
+                # invoice._recompute_dynamic_lines(recompute_all_taxes=False, recompute_tax_base_amount=False)
                 rec.invoice_id = invoice.id
 
 

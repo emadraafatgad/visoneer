@@ -156,7 +156,8 @@
         <field name="arch" type="xml">
             <form string="Task Stage" delete="0">
                 <header>
-                    <button name="rest_timesheet_to_draft" string="Reset Draft" groups="employee_project_timesheet_activity.group_reset_draft_branch"
+                    <button name="rest_timesheet_to_draft" string="Reset Draft"
+                            groups="employee_project_timesheet_activity.group_reset_draft_branch"
                             type="object" class="oe_highlight" status="submit"/>
                     <button name="submit_employee_timesheet" type="object" class="btn-danger" string="Submit TimeSheet"
                             states="draft"/>
@@ -195,7 +196,8 @@
                     </group>
                     <notebook>
                         <page string="Timesheet">
-                            <field name="timesheet_line_ids" context="{'default_employee_id':employee_id,'default_user_id':user_id}">
+                            <field name="timesheet_line_ids"
+                                   context="{'default_employee_id':employee_id,'default_user_id':user_id}">
                                 <tree editable="top" string="Timesheet Activities" sample="1">
                                     <field name="date"/>
                                     <field name="user_id" invisible="0"/>
@@ -260,6 +262,12 @@
                                     <field name="bill_non"/>
                                     <field name="company_id" invisible="1"/>
                                     <field name="state" invisible="1"/>
+                                    <field name="sheet_id" invisible="1"/>
+                                    <field name="attachment_number" invisible="1"/>
+                                    <widget name="attach_document" string="Attach Receipt" action="attach_document"
+                                            highlight="1"
+                                            attrs="{'invisible': ['|',('attachment_number', '&gt;=', 1), ('id','=',False)]}"/>
+
                                 </tree>
                                 <form string="Expenses">
                                     <sheet string="Expenses">
