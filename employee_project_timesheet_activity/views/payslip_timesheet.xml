@@ -12,8 +12,14 @@
                 <xpath expr="//notebook" position="inside">
                     <page string="Timesheet">
                         <group string="Hours Type">
-                            <group string="Local">
+                            <group string="Regular / Off">
                                 <field name="regular_hours" widget="float_time"/>
+                                <field name="paid_off_hours" widget="float_time"/>
+                                <field name="unpaid_off_hours" widget="float_time"/>
+                                <field name="public_holidays_hours" widget="float_time"/>
+
+                            </group>
+                            <group string="Local">
                                 <field name="overtime_hours" widget="float_time"/>
                                 <field name="weekend_hours" widget="float_time"/>
                                 <field name="holidays_hours" widget="float_time"/>

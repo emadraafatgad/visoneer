@@ -1,8 +1,9 @@
-from odoo import fields, models, api, _
-from odoo.exceptions import ValidationError
-from datetime import datetime
-from datetime import date, timedelta
 import calendar
+from datetime import datetime
+from datetime import timedelta
+
+from odoo import fields, models, api
+from odoo.exceptions import ValidationError
 
 
 class EmployeeProjectExpenses(models.Model):
@@ -53,6 +54,7 @@ class AccountAnalyticLine(models.Model):
          ('weekend', 'Weekend Overtime'),
          ('timeoff', 'Paid Time Off'),
          ('un_paid', 'UnPaid Time Off'),
+         ('public', 'Public holiday'),
          ('holiday', 'Holiday Overtime')], string="Type",
         default='regular', required=True)
 
@@ -60,7 +62,7 @@ class AccountAnalyticLine(models.Model):
 
     @api.onchange('time_type', 'bill_non')
     def check_bill_and_type(self):
-        if self.time_type and self.time_type == 'un_paid' and self.bill_non and self.bill_non == 'bill':
+        if self.time_type and self.time_type in ['public', 'un_paid'] and self.bill_non and self.bill_non == 'bill':
             raise ValidationError('UnPaid timeoff must be non billable')
 
     @api.constrains()
@@ -95,7 +97,7 @@ class AccountAnalyticLine(models.Model):
             price_overtime = 0
             week_day = rec.date.weekday()
             invoice_time_tpye = rec.time_type
-            if invoice_time_tpye == 'overtime':
+            if invoice_time_tpye in ['overtime', 'holiday']:
                 invoice_time_tpye = 'regular'
             price_overtime = price_unit * quotation.monday_saturday_overtime if invoice_time_tpye == 'overtime' else price_unit * quotation.sunday_holiday_overtime
             discount = quotation_line.discount
@@ -114,7 +116,7 @@ class AccountAnalyticLine(models.Model):
                                                                                                  start.strftime("%d"),
                                                                                                  start_month,
                                                                                                  end.strftime("%d"),
-                                                                                                 end_month ),
+                                                                                                 end_month),
                 'overtime': "Overtime working hours (Week#{}/{}) Mon, {}. {} - Sun, {}. {}".format(week_number,
                                                                                                    start.strftime("%Y"),
                                                                                                    start.strftime("%d"),
@@ -126,16 +128,16 @@ class AccountAnalyticLine(models.Model):
                                                                                                  start.strftime("%d"),
                                                                                                  start_month,
                                                                                                  end.strftime("%d"),
-                                                                                                 end_month ),
+                                                                                                 end_month),
                 'weekend': "WeekEnd working hours (Week#{}/{}) Mon, {}. {} - Sun, {}. {}".format(week_number,
                                                                                                  start.strftime("%Y"),
                                                                                                  start.strftime("%d"),
                                                                                                  start_month,
                                                                                                  end.strftime("%d"),
-                                                                                                 end_month )}
+                                                                                                 end_month)}
             invoice = self.env['account.move'].search([('state', '=', 'draft'), ('project_id', '=', rec.project_id.id),
                                                        ('service_id', '=', quotation_line.product_id.id)])
-            print("rec.id - ",rec.id)
+            print("rec.id - ", rec.id)
             if invoice:
                 print("If Invoice", rec.id)
                 rec.invoice_id = invoice.id
@@ -145,27 +147,30 @@ class AccountAnalyticLine(models.Model):
                 total_quantity = rec.unit_amount
                 overtime_quantity = 0
                 overtime_invoice_line = self.env['account.move.line']
-                print(invoice_line, " invoice_line",invoice_time_tpye)
+                print(invoice_line, " invoice_line", invoice_time_tpye)
                 if invoice_line:
                     print("if Invoice Line For -------------------------------{}".format(rec.id))
                     quant = invoice_line.quantity + rec.unit_amount
-                    print(quant, invoice_line.quantity ,rec.unit_amount)
-                    print("quant before 50",quant,invoice_time_tpye)
+                    print(quant, invoice_line.quantity, rec.unit_amount)
+                    print("quant before 50", quant, invoice_time_tpye)
                     if quant > 50 and invoice_time_tpye == 'regular':
-                        print("quant after 50",quant)
+                        print("quant after 50", quant)
                         total_quantity = 50
                         overtime_quantity = quant - 50
-                        print(overtime_quantity,"overtime_quantityovertime_quantity")
+                        print(overtime_quantity, "overtime_quantityovertime_quantity")
                         overtime_invoice_line = invoice.invoice_line_ids.filtered(
                             lambda x: x.time_type == 'overtime')
-                        print("overtime_invoice_line in check ine",overtime_invoice_line,overtime_invoice_line.quantity)
+                        holiday_invoice_line = invoice.invoice_line_ids.filtered(
+                            lambda x: x.time_type == 'holiday')
+                        print("overtime_invoice_line in check ine", overtime_invoice_line, overtime_invoice_line.quantity, 'holiday',
+                              holiday_invoice_line.quantity)
                     else:
                         total_quantity = quant
-                    print("total_quantity",total_quantity,'overtime_quantity',overtime_quantity)
+                    print("total_quantity", total_quantity, 'overtime_quantity', overtime_quantity)
                     print(overtime_invoice_line, overtime_quantity, invoice_line)
-                    if overtime_invoice_line and overtime_quantity:
+                    if rec.time_type !='holiday' and overtime_invoice_line and overtime_quantity:
                         qty = overtime_invoice_line['quantity']
-                        print(qty,overtime_invoice_line.quantity + overtime_quantity)
+                        print(qty, overtime_invoice_line.quantity + overtime_quantity)
                         print({
                             'quantity': overtime_invoice_line.quantity + overtime_quantity,
                             'price_unit': price_overtime})
@@ -186,19 +191,46 @@ class AccountAnalyticLine(models.Model):
                             'week_number': week_number,
                             'time_type': 'overtime',
                         }
-                        print("invoice line overtime",invoice_line)
+                        print("invoice line overtime", invoice_line)
                         invoice['invoice_line_ids'] = [(0, None, val)]
                         invoice._recompute_dynamic_lines(recompute_all_taxes=False)
-                    print(invoice_line,'invoice_line')
+                    elif holiday_invoice_line and overtime_quantity:
+                        qty = holiday_invoice_line['quantity']
+                        print(qty, holiday_invoice_line.quantity + overtime_quantity)
+                        print({
+                            'quantity': holiday_invoice_line.quantity + overtime_quantity,
+                            'price_unit': price_overtime})
+                        print(holiday_invoice_line.id)
+                        print("i will write overtime here")
+                        invoice.write({'invoice_line_ids': [(1, holiday_invoice_line.id, {
+                            'quantity': holiday_invoice_line.quantity + overtime_quantity,
+                            'price_unit': price_overtime,
+                        })]})
+                    elif not holiday_invoice_line and overtime_quantity:
+                        val = {
+                            'product_id': quotation_line.product_id.id,
+                            'name': inv_name_msg['overtime'],
+                            'account_id': quotation_line.product_id.property_account_income_id.id,
+                            'quantity': overtime_quantity,
+                            'discount': discount,
+                            'price_unit': price_unit * 1.25,
+                            'week_number': week_number,
+                            'time_type': 'overtime',
+                        }
+                        print("invoice line overtime", invoice_line)
+                        invoice['invoice_line_ids'] = [(0, None, val)]
+                        invoice._recompute_dynamic_lines(recompute_all_taxes=False)
+
+                    print(invoice_line, 'invoice_line')
                     print("i will write bas here")
                     print(invoice_line)
-                    write_out= invoice.write({'invoice_line_ids': [(1, invoice_line.id, {
+                    write_out = invoice.write({'invoice_line_ids': [(1, invoice_line.id, {
                         'quantity': total_quantity,
                         'price_unit': price_unit if invoice_time_tpye == 'regular' else price_overtime,
                     })]})
-                    print("write done", total_quantity,write_out)
+                    print("write done", total_quantity, write_out)
                     # print(invoice_line,'write done',invoice_line.quantity)
-                    print(invoice.invoice_line_ids,invoice.invoice_line_ids.mapped('quantity'))
+                    print(invoice.invoice_line_ids, invoice.invoice_line_ids.mapped('quantity'))
 
                 else:
                     print("If Not")
@@ -235,7 +267,7 @@ class AccountAnalyticLine(models.Model):
                         'price_unit': price_unit if invoice_time_tpye == 'regular' else price_overtime,
                         'week_number': week_number,
                         'time_type': invoice_time_tpye,
-                        'move_id':invoice.id,
+                        'move_id': invoice.id,
 
                     }
                     print(val)
@@ -281,8 +313,6 @@ class AccountAnalyticLine(models.Model):
 class EmployeeProjectTimeSheet(models.Model):
     _name = 'employee.project.timesheet'
 
-
-
     @api.model
     def _default_user(self):
         if self.employee_id.user_id:
@@ -290,21 +320,20 @@ class EmployeeProjectTimeSheet(models.Model):
         else:
             user = self.env.user
             employee = self.env.user.employee_id
-        return self.env.context.get('user_id', user.id)\
+        return self.env.context.get('user_id', user.id)
 
-    @api.model
+    @ api.model
     def _default_employee(self):
         if self.user_id:
             employee = self.user_id.employee_id
         else:
             employee = self.env.user.employee_id
-        return self.env.context.get('employee_id',employee)
-
+        return self.env.context.get('employee_id', employee)
 
     name = fields.Char(required=False)
     active = fields.Boolean(default=True)
     project_id = fields.Many2many('project.project', required=False)
-    employee_id = fields.Many2one('hr.employee', required=False,default=_default_employee,readonly=True)
+    employee_id = fields.Many2one('hr.employee', required=False, default=_default_employee, readonly=True)
     date_from = fields.Date(required=False, compute='get_date_from_date_to_from_schedule', store=True)
     date_to = fields.Date(required=False, compute='get_date_from_date_to_from_schedule', store=True)
     work_schedule_id = fields.Many2one('work.schedule', domain="[('employee_ids','in',employee_id)]", required=True)
@@ -319,11 +348,12 @@ class EmployeeProjectTimeSheet(models.Model):
     overtime_hours = fields.Float(compute='compute_timesheet_hours')
     weekend_hours = fields.Float(compute='compute_timesheet_hours')
     holidays_hours = fields.Float(compute='compute_timesheet_hours')
+    public_hours = fields.Float(compute='compute_timesheet_hours')
     timeoff_hours = fields.Float(compute='compute_timesheet_hours')
     invoice_id = fields.Many2one('account.move', string='Invoice Timesheet', store=True,
                                  compute='get_invoice_move_id_from_timesheet', )
 
-    user_id = fields.Many2one('res.users', string='User', default=_default_user,readonly=True)
+    user_id = fields.Many2one('res.users', string='User', default=_default_user, readonly=True)
 
     @api.depends('work_schedule_id')
     def get_date_from_date_to_from_schedule(self):
@@ -344,9 +374,9 @@ class EmployeeProjectTimeSheet(models.Model):
             self.state = 'draft'
 
     def submit_employee_timesheet(self):
-        total_hours = self.regular_hours + self.timeoff_hours
+        total_hours = self.regular_hours + self.timeoff_hours + self.public_hours
         total_overtime = self.overtime_hours + self.holidays_hours + self.weekend_hours
-        if total_hours <= 40:
+        if total_hours < 40:
             if total_overtime > 0:
                 raise ValidationError('you cant submit overtime')
         elif total_hours > 40:
@@ -361,6 +391,7 @@ class EmployeeProjectTimeSheet(models.Model):
             weekend = 0
             holidays = 0
             timeoff_hours = 0
+            public_hours = 0
             for line in rec.timesheet_line_ids:
                 if line.time_type == 'regular':
                     regular += line.unit_amount
@@ -372,11 +403,14 @@ class EmployeeProjectTimeSheet(models.Model):
                     holidays += line.unit_amount
                 elif line.time_type == 'timeoff':
                     timeoff_hours += line.unit_amount
+                elif line.time_type == 'public':
+                    public_hours += line.unit_amount
             rec.regular_hours = regular
             rec.overtime_hours = overtime
             rec.weekend_hours = weekend
             rec.holidays_hours = holidays
             rec.timeoff_hours = timeoff_hours
+            rec.public_hours = public_hours
 
     @api.constrains('timesheet_line_ids', 'date_from', 'date_to', 'user_id')
     def check_date_and_time(self):
@@ -392,7 +426,6 @@ class EmployeeProjectTimeSheet(models.Model):
         if self.work_schedule_id:
             self.date_from = self.work_schedule_id.date_from
             self.date_to = self.work_schedule_id.date_to
-
 
     # onchange if not employee not allow add aline or constains all line have the same employee and not empty
 

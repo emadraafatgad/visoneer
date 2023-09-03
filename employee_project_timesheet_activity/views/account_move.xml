@@ -46,11 +46,12 @@
                         <field name="employee_id" invisible="0"/>
                         <field name="project_id" required="1" options="{'no_create_edit': True}"/>
                         <field name="name" optional="show" required="0"/>
-                        <field name="total_amount" sum="Total"/>
-                        <field name="amount" string="Expense" invisible="1" sum="Total"/>
+                        <field name="total_amount" sum="Total" invisible="0"/>
+                        <field name="amount" string="Expense" invisible="0" sum="Total"/>
                         <field name="currency_id" invisible="0"/>
                         <field name="exchange_rate"/>
                         <field name="invoice_amount" sum="Total"/>
+                        <field name="expense_type" groups="account.group_account_invoice"/>
                         <field name="bill_non"/>
                         <field name="company_id" invisible="1"/>
                         <field name="state" invisible="1"/>

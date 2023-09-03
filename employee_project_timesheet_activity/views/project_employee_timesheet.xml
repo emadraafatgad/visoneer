@@ -187,6 +187,7 @@
                         <group string="Time">
                             <field name="regular_hours" widget="float_time"/>
                             <field name="timeoff_hours" widget="float_time"/>
+                            <field name="public_hours" widget="float_time"/>
                         </group>
                         <group string="OverTime">
                             <field name="overtime_hours" widget="float_time"/>
@@ -255,10 +256,11 @@
                                     <field name="date" string="date"/>
                                     <field name="employee_id" invisible="0"/>
                                     <field name="project_id" required="1" options="{'no_create_edit': True}"/>
-                                    <field name="name" optional="show" required="0"/>
-                                    <field name="unit_amount" sum="Total"/>
-                                    <field name="amount" string="Expense" invisible="0" sum="Total"/>
+                                    <field name="name" optional="show" required="1"/>
+                                    <field name="unit_amount" sum="Total" />
+                                    <field name="amount" string="Expense" invisible="0" sum="Total" groups="account.group_account_invoice"/>
                                     <field name="currency_id" invisible="0"/>
+                                    <field name="expense_type" groups="account.group_account_invoice"/>
                                     <field name="bill_non"/>
                                     <field name="company_id" invisible="1"/>
                                     <field name="state" invisible="1"/>

@@ -61,7 +61,7 @@
 
                         <tr>
                             <t t-set="index" t-value="index + 1"/>
-                            <t t-set="total_paid_amount" t-value="total_paid_amount + expense_line.total_amount"/>
+                            <t t-set="total_paid_amount" t-value="total_paid_amount + expense_line.amount"/>
                             <td align="center">
                                 <t t-esc="index"/>
                             </td>
@@ -73,7 +73,7 @@
                             </td>
                             <td class="text-right">
                                 <!--                                    <span>Date</span>-->
-                                <t t-esc="expense_line.total_amount"
+                                <t t-esc="expense_line.amount"
                                    t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
                             </td>
                         </tr>

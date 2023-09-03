@@ -30,14 +30,17 @@ class HrExpenses(models.Model):
                                                   'approved': [('readonly', False)], 'refused': [('readonly', False)]},
                                digits='Product Price')
     exchange_rate = fields.Float(default=1)
-    invoice_amount = fields.Monetary(compute='calc_invoice_amount_in_rate',currency_field='move_id.currency_id')
+    move_currency = fields.Many2one('res.currency', related='move_id.currency_id')
+    invoice_amount = fields.Monetary(compute='calc_invoice_amount_in_rate', currency_field='move_currency')
+    expense_type = fields.Selection([('project', 'Project Expense'), ('travel', 'Travel'), ('other', 'Other Expense')],
+                                    default='other')
 
-    @api.depends('exchange_rate','total_amount')
+    @api.depends('exchange_rate', 'total_amount')
     def calc_invoice_amount_in_rate(self):
         for rec in self:
-            rec.invoice_amount = rec.total_amount/rec.exchange_rate
+            rec.invoice_amount = rec.amount / rec.exchange_rate
 
-    @api.onchange('unit_amount')
+    @api.onchange('unit_amount', 'bill_non')
     def change_expense_amount_from_amount(self):
         if self.bill_non == 'non':
             total_amount = self.unit_amount
