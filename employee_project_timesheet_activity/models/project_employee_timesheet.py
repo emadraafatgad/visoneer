@@ -399,7 +399,7 @@ class EmployeeProjectTimeSheet(models.Model):
                     overtime += line.unit_amount
                 elif line.time_type == 'weekend':
                     weekend += line.unit_amount
-                elif line.time_type == 'holidays':
+                elif line.time_type == 'holiday':
                     holidays += line.unit_amount
                 elif line.time_type == 'timeoff':
                     timeoff_hours += line.unit_amount
