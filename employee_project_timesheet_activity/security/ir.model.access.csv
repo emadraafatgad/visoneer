@@ -12,3 +12,4 @@ working_schedule_access_teams,working_schedule_access,model_work_schedule,group_
 working_schedule_access_user,working_schedule_access,model_work_schedule,group_personal_timesheet,1,0,0,0
 access_employee_project_expenses,access.project_timesheet_expenses,model_employee_project_expenses,,1,1,1,1
 access_per_diem_expenses,account_per_diem,model_account_per_diem,,1,1,1,1
+access_expense_total,account_expense_total,model_hr_expense_total,,1,1,1,1

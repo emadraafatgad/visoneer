@@ -12,62 +12,39 @@
                    style=" font-family:Verdana, Arial,sans-serif; width: 100%; border-collapse:separate;">
                 <thead>
                     <tr>
-                        <th name="th_sl_no" class="text-center" style="width:50px">
+                        <th name="th_sl_no" class="text-center" >
                             <span>No</span>
                         </th>
-                        <th name="th_payment_date"
-                            t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"
-                            style="width:100px">
-                            <span>Date</span>
-                        </th>
+                        <!--                        <th name="th_payment_date"-->
+                        <!--                            t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"-->
+                        <!--                            style="width:100px">-->
+                        <!--                            <span>Date</span>-->
+                        <!--                        </th>-->
                         <th name="th_payment_reference"
                             t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"
-                            style="width:200px">
-                            <span>Expense Type</span>
+                            style="width:400px">
+                            <span>Expense</span>
                         </th>
                         <th name="th_amount_paid"
                             t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"
-                            style="width:110px">
-                            <span>Amount Paid</span>
+                           >
+                            <span>Expense Amount</span>
                         </th>
                     </tr>
                 </thead>
                 <tbody class="payment_details_table_body">
                     <t t-set="index" t-value="0"/>
                     <t t-set="total_paid_amount" t-value="0"/>
-                    <t t-foreach="o.hr_expense_line_ids" t-as="expense_line">
-                        <t t-if="expense_line.bill_non == 'bill'">
-                            <tr>
-                                <t t-set="index" t-value="index + 1"/>
-                                <t t-set="total_paid_amount" t-value="total_paid_amount + expense_line.invoice_amount"/>
-                                <td align="center">
-                                    <t t-esc="index"/>
-                                </td>
-                                <td align="center">
-                                    <t t-esc="expense_line.date"/>
-                                </td>
-                                <td align="center">
-                                    <t t-esc="expense_line.name"/>
-                                </td>
-                                <td class="text-right">
-                                    <!--                                    <span>Date</span>-->
-                                    <t t-esc="expense_line.invoice_amount"
-                                       t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
-                                </td>
-                            </tr>
-                        </t>
-                    </t>
-                    <t t-foreach="o.other_expense_ids" t-as="expense_line">
-
+                    <t t-foreach="o.summary_expense_ids" t-as="expense_line">
                         <tr>
                             <t t-set="index" t-value="index + 1"/>
                             <t t-set="total_paid_amount" t-value="total_paid_amount + expense_line.amount"/>
                             <td align="center">
                                 <t t-esc="index"/>
                             </td>
-                            <td align="center">
-                                <t t-esc="expense_line.date"/>
-                            </td>
+                            <!--                                <td align="center">-->
+                            <!--                                    <t t-esc="expense_line.date"/>-->
+                            <!--                                </td>-->
                             <td align="center">
                                 <t t-esc="expense_line.name"/>
                             </td>
@@ -78,6 +55,7 @@
                             </td>
                         </tr>
                     </t>
+
                     <tr>
                         <td align="center">
                         </td>
@@ -94,15 +72,16 @@
                     <separator/>
                     <tr>
                         <td align="center"></td>
-                        <td align="center"> </td>
+                        <td align="center"></td>
                         <td align="center">
                             <span>Total Invoice</span>
                         </td>
                         <td class="text-right">
                             <t t-set="total_invoice_amount" t-value="total_paid_amount + current_subtotal"/>
-                            <t t-esc="current_subtotal+total_paid_amount" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
-<!--                            <t t-esc="total_invoice"-->
-<!--                               t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>-->
+                            <t t-esc="current_subtotal+total_paid_amount"
+                               t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                            <!--                            <t t-esc="total_invoice"-->
+                            <!--                               t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>-->
                         </td>
                     </tr>
                 </tbody>

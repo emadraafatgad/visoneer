@@ -120,6 +120,25 @@
                         </sheet>
                     </form>
                 </field>
+                <button string="Compute Expense Sammary" name="compute_expense_summary" type="object" class="btn btn-success"/>
+                <field name="summary_expense_ids" string="Expenses Summary" invisible="0">
+                    <tree editable="top" string="Expense Summary" sample="1">
+                        <field name="expense_type" invisible="0"/>
+                        <field name="name" optional="show" required="0"/>
+                        <field name="amount" sum="Total"/>
+                    </tree>
+                    <form string="Expenses Summary">
+                        <sheet string="Expenses Summary">
+                            <group>
+                                <group>
+                                    <field name="expense_type" invisible="0" required="1"/>
+                                    <field name="name"  required="1"/>
+                                    <field name="amount" sum="Total" required="1"/>
+                                </group>
+                            </group>
+                        </sheet>
+                    </form>
+                </field>
             </xpath>
             <xpath expr="//field[@name='payment_reference']" position="after">
                 <field name="service_id"/>

@@ -1,6 +1,18 @@
 from odoo import fields, models, api
 
 
+class HrExpenseTotal(models.Model):
+    _name = 'hr.expense.total'
+
+    expense_type = fields.Selection(
+        [('project', 'Project Expense'), ('travel', 'Travel'), ('other', 'Other Expense'), ('perdiem', 'Per Diem')],
+        required=1,
+        default='other')
+    name = fields.Char(string="Description", required=1)
+    amount = fields.Float(required=True)
+    account_move_id = fields.Many2one('account.move')
+
+
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
@@ -95,12 +107,53 @@ class AccountMove(models.Model):
 
     expenses_line_ids = fields.One2many('employee.project.expenses', 'move_id')
     hr_expense_line_ids = fields.One2many('hr.expense', 'move_id', string='Expenses')
+    summary_expense_ids = fields.One2many('hr.expense.total', 'account_move_id', string='Expenses Summary')
     other_expense_ids = fields.One2many('account.per.diem', 'move_id', string='Other')
     project_id = fields.Many2one('project.project')
     service_id = fields.Many2one('product.product', domain="[('type','=','service')]", store=True)
     per_diem = fields.Float()
     employee_id = fields.Many2one('hr.employee')
     expense_move_id = fields.Many2one('account.move')
+
+    def compute_expense_summary(self):
+        expense_type = self.hr_expense_line_ids.mapped('expense_type')
+        travel_expense = self.hr_expense_line_ids.filtered(lambda l: l.expense_type == 'travel').mapped(
+            'invoice_amount')
+        project_expense = self.hr_expense_line_ids.filtered(lambda l: l.expense_type == 'project').mapped(
+            'invoice_amount')
+        other_expense = self.hr_expense_line_ids.filtered(lambda l: l.expense_type == 'other').mapped('invoice_amount')
+        perdiem_expense = self.other_expense_ids.mapped('total_amount')
+        print('perdiem_expense')
+        print(perdiem_expense)
+
+        if travel_expense:
+            self.env['hr.expense.total'].create({
+                'name': 'travel',
+                'expense_type': 'travel',
+                'amount': sum(travel_expense),
+                'account_move_id': self.id,
+            })
+        if project_expense:
+            self.env['hr.expense.total'].create({
+                'name': 'project_expense',
+                'expense_type': 'project',
+                'amount': sum(project_expense),
+                'account_move_id': self.id,
+            })
+        if travel_expense:
+            self.env['hr.expense.total'].create({
+                'name': 'other_expense',
+                'expense_type': 'other',
+                'amount': sum(other_expense),
+                'account_move_id': self.id,
+            })
+        if perdiem_expense:
+            self.env['hr.expense.total'].create({
+                'name': 'perdiem',
+                'expense_type': 'perdiem',
+                'amount': sum(perdiem_expense),
+                'account_move_id': self.id,
+            })
 
     def _get_account_move_line_values(self):
         move_line_values_by_expense = {}
