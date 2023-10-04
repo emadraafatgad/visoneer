@@ -99,7 +99,7 @@ class AccountAnalyticLine(models.Model):
             invoice_time_tpye = rec.time_type
             if invoice_time_tpye in ['overtime', 'holiday']:
                 invoice_time_tpye = 'regular'
-            price_overtime = price_unit * quotation.monday_saturday_overtime if invoice_time_tpye == 'overtime' else price_unit * quotation.sunday_holiday_overtime
+            price_overtime = price_unit * quotation_line.order_id.monday_saturday_overtime if invoice_time_tpye == 'overtime' else price_unit * quotation_line.order_id.sunday_holiday_overtime
             discount = quotation_line.discount
             # sunday_holiday_price_overtime = price_unit * quotation.sunday_holiday_overtime
 
